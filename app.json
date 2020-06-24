@@ -1,0 +1,17 @@
+{
+  "name": "wordwind",
+  "displayName": "wordwind",
+  "expo": {
+    "name": "wordwind",
+    "slug": "wordwind",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
