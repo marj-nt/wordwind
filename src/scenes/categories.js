@@ -26,18 +26,52 @@ const categoriesStyles = StyleSheet.create({
     width: width,
     height: height,
   },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  centerImage: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 })
 
 export default class CategoriesComponent extends React.Component { 
+
+  
+
     render() { 
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View>
         <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
-        <Text>Categories Screen</Text>
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate({routeName: 'HomeScreen'})}
-        />
+          <View style={categoriesStyles.row}>
+          <Text>Categories</Text>
+          </View>
+          <View style={categoriesStyles.row}>
+            <TouchableOpacity style={categoriesStyles.centerImage}>
+              <Image  source={require(catIcon1)}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={categoriesStyles.centerImage}>
+              <Image  source={require(catIcon2)}/>
+            </TouchableOpacity>
+          </View>
+          <View style={categoriesStyles.row}>
+              <TouchableOpacity style={categoriesStyles.centerImage}>
+              <Image  source={require(catIcon3)}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={categoriesStyles.centerImage}>
+              <Image  source={require(catIcon4)}/>
+            </TouchableOpacity>
+          </View>
+          <View style={categoriesStyles.row}>
+          <TouchableOpacity style={categoriesStyles.centerImage}>
+          <Image  source={require(catIcon5)}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={categoriesStyles.centerImage}>
+          <Image  source={require(catIcon6)}/>
+        </TouchableOpacity>
+          </View>
         </LinearGradient>
       </View>
       );

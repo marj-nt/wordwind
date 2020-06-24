@@ -29,8 +29,9 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-import HomeComponent from '@screens/home.js';
-import CategoriesComponent from '@screens/categories.js';
+import HomeComponent from 'src/scenes/home.js';
+import CategoriesComponent from 'src/scenes/categories.js';
+import GameComponent from 'src/scenes/game.js';
 
 
 // import Navigator from '@navigations';
@@ -38,11 +39,13 @@ import CategoriesComponent from '@screens/categories.js';
 // const App = () => <Navigator />;
 
 function App() {
+
     return (
       <View>
-        <CategoriesComponent/>
+        <GameComponent/>
       </View>
     );
-  }
+    
+}
 
 export default App;
