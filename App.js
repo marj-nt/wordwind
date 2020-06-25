@@ -34,6 +34,7 @@ import HomeComponent from '@screens/home.js';
 import CategoriesComponent from '@screens/categories.js';
 import GameComponent from '@screens/game.js';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import CountDown from 'react-native-countdown-component';
 
 
 // import Navigator from '@navigations';
@@ -42,11 +43,11 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 class App extends React.Component {
 
- render() {
+  render() {
     return (
-     <GameComponent/>
+      <GameComponent/>
     )
-  }
+}
 }
  
 export default App;

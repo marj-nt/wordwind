@@ -63,8 +63,6 @@ export const gameStyles = StyleSheet.create({
     recContainer: {
       width: 140,
       height: 140,
-      borderWidth: 4,
-      borderColor: '#000',
       justifyContent: 'center',
       alignItems: 'center',
       marginLeft: 'auto',

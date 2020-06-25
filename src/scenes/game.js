@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {StackNavigator} from 'react-navigation';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import CountDown from 'react-native-countdown-component';
 
 import { shuffleWord as shuffleWord } from '@components/wordShuffle.js';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
@@ -13,6 +14,7 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import RNShake from 'react-native-shake';
 
 import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.js';
+
 
 const gradientBlue = ['#4C39A1', '#000C87'];
 const gradientGreen = ['green', 'white'];
@@ -62,7 +64,18 @@ export default class GameComponent extends React.Component {
             config={config}
             >
                 <LinearGradient style={gameStyles.topContainer} colors={gradientBlue}>
-                <Text style={gameStyles.timerFont}>30</Text>
+
+                {/* TIMER */}
+                <CountDown
+                style={gameStyles.timerFont}
+                until={30}
+                onFinish={() => alert('Round over!')}
+                size={20}
+                timeToShow={['S']}
+                timeLabels={[]}
+                digitStyle={{backgroundColor: ''}}
+                digitTxtStyle={'white'}
+            />
 
                 <Text style={gameStyles.wordFont}>{this.state.randomWord}</Text>
       </LinearGradient>
@@ -77,7 +90,7 @@ export default class GameComponent extends React.Component {
                     <AnimatedCircularProgress style={gameStyles.animatedCircle}
                     size={120}
                     width={10}
-                    fill={100}
+                    fill={0}
                     tintColor="#00e0ff"
                     onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor="#3d5875" />
@@ -89,17 +102,6 @@ export default class GameComponent extends React.Component {
 
                 </View>
                 <View style={gameStyles.recContainer}>
-                    <AnimatedCircularProgress style={gameStyles.animatedCircle}
-                    size={120}
-                    width={10}
-                    fill={100}
-                    tintColor="#00e0ff"
-                    onAnimationComplete={() => console.log('onAnimationComplete')}
-                    backgroundColor="#3d5875" />
-
-                    <TouchableOpacity style={gameStyles.recButton} onPress={this._onPress}>
-                        <Text>REC</Text>
-                    </TouchableOpacity>
 
                 </View>
             </View>
