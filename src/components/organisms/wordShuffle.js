@@ -1,6 +1,8 @@
+import { foodList, kidsList, colorsList, musicList, animalList, sportsList } from '../organisms/wordList.js';
 
-function shuffleWord() {
-    var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
- 
-    return RandomNumber;
+export function shuffleWord() {
+    
+    var index = Math.floor(Math.random() * (foodList.length));
+
+    return foodList[index];
 }

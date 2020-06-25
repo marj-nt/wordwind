@@ -7,7 +7,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {StackNavigator} from 'react-navigation';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-import { shuffleWord } from '../components/organisms/wordShuffle';
+import { shuffleWord as shuffleWord } from '../components/organisms/wordShuffle';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 const gradientBlueGreen = ['#70FAA8', '#A2B0FF'];
 const gradientBottom = ['#B8EBFC', '#E3E1FF'];
@@ -21,6 +23,7 @@ const topHeight = height * 0.7
 const bottomHeight = height * 0.3
 
 const gradientBlue = ['#4C39A1', '#000C87'];
+const gradientGreen = ['green', 'white'];
 
 const gameStyles = StyleSheet.create({
   topContainer: {
@@ -85,25 +88,53 @@ const gameStyles = StyleSheet.create({
   }
 })
 
-
+var randomWord = shuffleWord();
 
 export default class GameComponent extends React.Component { 
+    constructor(props) {
+        super(props);
+        this.state = {
+          randomWord: randomWord,
+          background1: String(gradientBlue[0]),
+          background2: String(gradientBlue[1]),
+        };
+      }
 
-    
+      onSwipeLeft(gestureState) {
+        this.setState({randomWord: shuffleWord()});
+      }
+     
+      onSwipeRight(gestureState) {
+        this.setState({randomWord: shuffleWord()});
+      }
 
     render() { 
 
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+          };        
+
+          console.log(this.background1)
+          console.log(this.background2)
 
       return (
         <View>
 
             {/* TOP CONTAINER */}
 
-            <LinearGradient style={gameStyles.topContainer} colors={gradientBlue}>
+            <GestureRecognizer
+            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            onSwipeRight={(state) => this.onSwipeRight(state)}
+            config={config}
+            >
+                <LinearGradient style={gameStyles.topContainer} colors={gradientBlue}>
                 <Text style={gameStyles.timerFont}>30</Text>
 
-                <Text style={gameStyles.wordFont}>Hello</Text>
-            </LinearGradient>
+                <Text style={gameStyles.wordFont}>{this.state.randomWord}</Text>
+      </LinearGradient>
+            </GestureRecognizer>
+
 
             {/* BOTTOM CONTAINER */}
 
@@ -118,7 +149,8 @@ export default class GameComponent extends React.Component {
                     onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor="#3d5875" />
 
-                    <TouchableOpacity style={gameStyles.recButton}>
+                    <TouchableOpacity style={gameStyles.recButton}
+                    onPress={this.setText}>
                         <Text>REC</Text>
                     </TouchableOpacity>
 
@@ -132,7 +164,7 @@ export default class GameComponent extends React.Component {
                     onAnimationComplete={() => console.log('onAnimationComplete')}
                     backgroundColor="#3d5875" />
 
-                    <TouchableOpacity style={gameStyles.recButton}>
+                    <TouchableOpacity style={gameStyles.recButton} onPress={this._onPress}>
                         <Text>REC</Text>
                     </TouchableOpacity>
 
