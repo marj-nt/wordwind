@@ -47,4 +47,6 @@ target 'wordwind' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'react-native-shake', :path => '../node_modules/react-native-shake'
+
 end
