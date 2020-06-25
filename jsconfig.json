@@ -3,6 +3,9 @@
       "baseUrl": "./",
       "paths": {
         "@screens": ["./src/scenes"],
+        "@styles": ["./src/styles"],
+        "@components": ["./src/components"],
+        "@assets": ["./src/assets"],
       }
     }
   }

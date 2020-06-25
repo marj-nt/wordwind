@@ -1,12 +1,3 @@
-// import React from 'react';
-// import StyleSheet from 'react-native';
-
-// export const teststyles = {
-//     background: {
-//         backgroundColor: '#9400D3'
-//     },
-//   };
-
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({

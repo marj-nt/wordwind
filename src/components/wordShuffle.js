@@ -1,4 +1,4 @@
-import { foodList, kidsList, colorsList, musicList, animalList, sportsList } from '../organisms/wordList.js';
+import { foodList, kidsList, colorsList, musicList, animalList, sportsList } from '@components/wordList.js'
 
 export function shuffleWord() {
     

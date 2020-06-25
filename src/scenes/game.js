@@ -7,13 +7,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {StackNavigator} from 'react-navigation';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-import { shuffleWord as shuffleWord } from '../components/organisms/wordShuffle';
+import { shuffleWord as shuffleWord } from '@components/wordShuffle.js';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import RNShake from 'react-native-shake';
 
-import {gameStyles as gameStyles} from '../styles/game.js';
-import {gameColors as gameColors} from '../styles/game.js';
+import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.js';
 
 const gradientBlue = ['#4C39A1', '#000C87'];
 const gradientGreen = ['green', 'white'];
@@ -33,13 +32,14 @@ export default class GameComponent extends React.Component {
         };
       }
 
-      onSwipeLeft(gestureState) {
-        this.setState({randomWord: shuffleWord()});
-      }
-     
-      onSwipeRight(gestureState) {
-        this.setState({randomWord: shuffleWord()});
-      }
+    // Swipe handlers
+    onSwipeLeft(gestureState) {
+    this.setState({randomWord: shuffleWord()});
+    }
+    
+    onSwipeRight(gestureState) {
+    this.setState({randomWord: shuffleWord()});
+    }
 
     render() { 
 

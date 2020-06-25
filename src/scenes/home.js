@@ -5,7 +5,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {StackNavigator} from 'react-navigation';
-import home from "../styles/home";
 
 const gradientBlueGreen = ['#70FAA8', '#A2B0FF'];
 const buttonSalmon = '#EF8B8B';

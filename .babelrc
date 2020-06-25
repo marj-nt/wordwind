@@ -5,7 +5,10 @@
         {
         "root": "./",
           "alias": {
-            "@screens": "./src/scenes"
+            "@screens": "./src/scenes",
+            "@styles": "./src/styles",
+            "@components": "./src/components",
+            "@assets": "./src/assets"
           }
         }
       ]
