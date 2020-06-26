@@ -33,9 +33,6 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import HomeComponent from '@screens/home.js';
 import CategoriesComponent from '@screens/categories.js';
 import GameComponent from '@screens/game.js';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import CountDown from 'react-native-countdown-component';
-
 
 // import Navigator from '@navigations';
 
@@ -45,10 +42,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <GameComponent/>
+      <HomeComponent/>
     )
 }
 }
+
  
 export default App;
 
