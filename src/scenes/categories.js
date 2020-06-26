@@ -35,42 +35,70 @@ const categoriesStyles = StyleSheet.create({
   },
 })
 
-function CategoriesComponent(props) {
-  const { navigation } = props;
-  return (
-    <View>
-        <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
-          <View style={categoriesStyles.row}>
-          <Text>Categories</Text>
-          </View>
-          <View style={categoriesStyles.row}>
+class CategoriesComponent extends React.Component {
+  render() {
+    return (
+      <View>
+          <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
+            <View style={categoriesStyles.row}>
+            <Text>Categories</Text>
+            </View>
+            
+            <View style={categoriesStyles.row}>
+              <TouchableOpacity style={categoriesStyles.centerImage}
+                onPress={() => this.props.navigation.navigate('Game', {
+                  category: 'sports'
+                })}
+              >
+                <Image  source={require(catIcon1)}/>
+              </TouchableOpacity>
+              <TouchableOpacity style={categoriesStyles.centerImage}
+                onPress={() => this.props.navigation.navigate('Game', {
+                  category: 'music'
+                })}
+              >
+                <Image  source={require(catIcon2)}/>
+              </TouchableOpacity>
+            </View>
+  
+            <View style={categoriesStyles.row}>
+                <TouchableOpacity style={categoriesStyles.centerImage}
+                  onPress={() => this.props.navigation.navigate('Game', {
+                    category: 'food'
+                  })}
+                >
+                <Image  source={require(catIcon3)}/>
+              </TouchableOpacity>
+              <TouchableOpacity style={categoriesStyles.centerImage}
+                onPress={() => this.props.navigation.navigate('Game', {
+                  category: 'animals'
+                })}
+              >
+                <Image  source={require(catIcon4)}/>
+              </TouchableOpacity>
+            </View>
+  
+            <View style={categoriesStyles.row}>
             <TouchableOpacity style={categoriesStyles.centerImage}
-            onPress={() => navigation.navigate('Game')}>
-              <Image  source={require(catIcon1)}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={categoriesStyles.centerImage}>
-              <Image  source={require(catIcon2)}/>
-            </TouchableOpacity>
-          </View>
-          <View style={categoriesStyles.row}>
-              <TouchableOpacity style={categoriesStyles.centerImage}>
-              <Image  source={require(catIcon3)}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={categoriesStyles.centerImage}>
-              <Image  source={require(catIcon4)}/>
-            </TouchableOpacity>
-          </View>
-          <View style={categoriesStyles.row}>
-          <TouchableOpacity style={categoriesStyles.centerImage}>
-          <Image  source={require(catIcon5)}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={categoriesStyles.centerImage}>
-          <Image  source={require(catIcon6)}/>
-        </TouchableOpacity>
-          </View>
-        </LinearGradient>
-      </View>
-  )
+              onPress={() => this.props.navigation.navigate('Game', {
+                category: 'colors'
+              })}
+              >
+            <Image  source={require(catIcon5)}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={categoriesStyles.centerImage}
+            onPress={() => this.props.navigation.navigate('Game', {
+              category: 'kids'
+            })}
+            >
+            <Image  source={require(catIcon6)}/>
+          </TouchableOpacity>
+            </View>
+  
+          </LinearGradient>
+        </View>
+    )
+  }
 }
 
 export default CategoriesComponent;

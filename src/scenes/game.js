@@ -18,7 +18,6 @@ const gradientBlue = ['#4C39A1', '#000C87'];
 const gradientGreen = ['green', 'white'];
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
-var randomWord = shuffleWord();
 var initScore = 0;
 
 const MAXTIME = 5000;
@@ -47,8 +46,9 @@ export default class GameComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          randomWord: randomWord,
+          randomWord: shuffleWord(this.props.route.params.category),
           score: initScore,
+          roundTime: 3,
 
           background1: String(gradientBlue[0]),
           background2: String(gradientBlue[1]),
@@ -63,14 +63,14 @@ export default class GameComponent extends React.Component {
     // Swipe handlers
     onSwipeLeft(gestureState) {
     this.setState({
-        randomWord: shuffleWord(),
+        randomWord: shuffleWord(this.props.route.params.category),
         score: this.state.score + 1,
     });
     }
     
     onSwipeRight(gestureState) {
     this.setState({
-        randomWord: shuffleWord(),
+        randomWord: shuffleWord(this.props.route.params.category),
         score: this.state.score + 1,
     });
     }
@@ -117,7 +117,7 @@ export default class GameComponent extends React.Component {
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={10}
+                    until={this.state.roundTime}
                     onFinish={() => {
                         alert('Round finished!')
                         this.props.navigation.navigate('Score', {
@@ -128,7 +128,7 @@ export default class GameComponent extends React.Component {
                     size={20}
                     timeToShow={['S']}
                     timeLabels={[]}
-                    digitStyle={{backgroundColor: ''}}
+                    digitStyle={{backgroundColor: 'black'}}
                     digitTxtStyle={'white'}
                     />
 
