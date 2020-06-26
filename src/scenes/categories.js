@@ -2,9 +2,7 @@ import React from "react";
 import { Dimensions, View, Text, Button, Image, TouchableOpacity } from "react-native";
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import {StackNavigator} from 'react-navigation';
+import { withNavigation } from 'react-navigation'
 
 const gradientBlueGreen = ['#70FAA8', '#A2B0FF'];
 

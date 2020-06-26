@@ -1,10 +1,6 @@
 import React from "react";
-import { Dimensions, View, Text, Button, Image, TouchableOpacity } from "react-native";
-import { StyleSheet } from 'react-native';
+import { Dimensions, View, Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import {StackNavigator} from 'react-navigation';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
 

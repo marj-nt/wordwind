@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeComponent from '@screens/home.js'
 import CategoriesComponent from '@screens/categories.js'
 import GameComponent from '@screens/game.js'
+import ScoreComponent from '@screens/score.js'
 
 
 const Stack = createStackNavigator()
@@ -28,6 +29,10 @@ function MainStackNavigator() {
     <Stack.Screen
       name='Game'
       component={GameComponent}
+    />
+    <Stack.Screen
+      name='Score'
+      component={ScoreComponent}
     />
   </Stack.Navigator>
     </NavigationContainer>
