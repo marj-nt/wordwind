@@ -19,6 +19,7 @@ const gradientGreen = ['green', 'white'];
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
 var randomWord = shuffleWord();
+var initScore = 0;
 
 const MAXTIME = 5000;
 var second = 0;
@@ -47,6 +48,8 @@ export default class GameComponent extends React.Component {
         super(props);
         this.state = {
           randomWord: randomWord,
+          score: initScore,
+
           background1: String(gradientBlue[0]),
           background2: String(gradientBlue[1]),
           seconds: 0,
@@ -59,11 +62,17 @@ export default class GameComponent extends React.Component {
 
     // Swipe handlers
     onSwipeLeft(gestureState) {
-    this.setState({randomWord: shuffleWord()});
+    this.setState({
+        randomWord: shuffleWord(),
+        score: this.state.score + 1,
+    });
     }
     
     onSwipeRight(gestureState) {
-    this.setState({randomWord: shuffleWord()});
+    this.setState({
+        randomWord: shuffleWord(),
+        score: this.state.score + 1,
+    });
     }
 
     increaseTimer = () => {
@@ -105,23 +114,29 @@ export default class GameComponent extends React.Component {
             >
                 <LinearGradient style={gameStyles.topContainer} colors={gradientBlue}>
 
-                {/* TIMER */}
-                <CountDown
-                style={gameStyles.timerFont}
-                until={10}
-                onFinish={() => {
-                    alert('Round finished!')
-                    this.props.navigation.navigate('Home')}
-                }
-                size={20}
-                timeToShow={['S']}
-                timeLabels={[]}
-                digitStyle={{backgroundColor: ''}}
-                digitTxtStyle={'white'}
-            />
+                    {/* TIMER */}
+                    <CountDown
+                    style={gameStyles.timerFont}
+                    until={10}
+                    onFinish={() => {
+                        alert('Round finished!')
+                        this.props.navigation.navigate('Score', {
+                            finalScore: this.state.score
+                        })
+                    }
+                    }
+                    size={20}
+                    timeToShow={['S']}
+                    timeLabels={[]}
+                    digitStyle={{backgroundColor: ''}}
+                    digitTxtStyle={'white'}
+                    />
 
-                <Text style={gameStyles.wordFont}>{this.state.randomWord}</Text>
-      </LinearGradient>
+                    {/* DISPLAY WORD */}
+                    <Text style={gameStyles.wordFont}>{this.state.randomWord}</Text>
+
+                </LinearGradient>
+
             </GestureRecognizer>
 
 

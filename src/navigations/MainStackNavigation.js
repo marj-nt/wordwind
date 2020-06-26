@@ -14,7 +14,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
     <Stack.Navigator 
-        initialRouteName='Home'
+        initialRouteName='Game'
         screenOptions={{headerShown: false}}
         defaultNavigationOptions={{gesturesEnabled: false}}
     >
