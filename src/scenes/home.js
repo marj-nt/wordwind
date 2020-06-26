@@ -15,13 +15,14 @@ const pathIcon1 = '../assets/home-play-icon.png';
 const pathIcon2 = '../assets/home-tutorial-icon.png';
 const pathIcon3 = '../assets/home-options-icon.png';
 
-export default class HomeComponent extends React.Component { 
-    render() { 
-      return (
-        <View>
+function HomeComponent(props) {
+  const { navigation } = props;
+  return (
+    <View>
         <LinearGradient style={homeStyles.mainBackground} colors={gradientBlueGreen}>
         <Image style={homeStyles.title} source={require(pathTitle)}/>
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}>
+        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
+        onPress={() => navigation.navigate('Categories')}>
           <Image style={homeStyles.icons} source={require(pathIcon1)}/>
           <Text style={homeStyles.buttonText}>PLAY</Text>
         </TouchableOpacity>
@@ -35,6 +36,7 @@ export default class HomeComponent extends React.Component {
         </TouchableOpacity>
         </LinearGradient>
         </View>
-      );
-    }
-  }
+  )
+}
+
+export default HomeComponent;

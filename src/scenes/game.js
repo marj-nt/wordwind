@@ -8,6 +8,8 @@ import {StackNavigator} from 'react-navigation';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
 
+import { withNavigation } from 'react-navigation'
+
 import { shuffleWord as shuffleWord } from '@components/wordShuffle.js';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
@@ -93,6 +95,8 @@ export default class GameComponent extends React.Component {
           };        
           var circleInterval = MAXTIME / 100;
 
+          
+
       return (
         <View>
 
@@ -108,8 +112,11 @@ export default class GameComponent extends React.Component {
                 {/* TIMER */}
                 <CountDown
                 style={gameStyles.timerFont}
-                until={30}
-                // onFinish={() => alert('Round over!')}
+                until={10}
+                onFinish={() => {
+                    alert('Round finished!')
+                    this.props.navigation.navigate('Home')}
+                }
                 size={20}
                 timeToShow={['S']}
                 timeLabels={[]}

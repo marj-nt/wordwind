@@ -37,19 +37,17 @@ const categoriesStyles = StyleSheet.create({
   },
 })
 
-export default class CategoriesComponent extends React.Component { 
-
-  
-
-    render() { 
-      return (
-        <View>
+function CategoriesComponent(props) {
+  const { navigation } = props;
+  return (
+    <View>
         <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
           <View style={categoriesStyles.row}>
           <Text>Categories</Text>
           </View>
           <View style={categoriesStyles.row}>
-            <TouchableOpacity style={categoriesStyles.centerImage}>
+            <TouchableOpacity style={categoriesStyles.centerImage}
+            onPress={() => navigation.navigate('Game')}>
               <Image  source={require(catIcon1)}/>
             </TouchableOpacity>
             <TouchableOpacity style={categoriesStyles.centerImage}>
@@ -74,6 +72,7 @@ export default class CategoriesComponent extends React.Component {
           </View>
         </LinearGradient>
       </View>
-      );
-    }
-  }
+  )
+}
+
+export default CategoriesComponent;
