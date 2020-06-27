@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, TouchableOpacity } from 'react-native'
 import { withNavigation } from 'react-navigation'
 
 class ScoreComponent extends React.Component {
@@ -7,10 +7,11 @@ class ScoreComponent extends React.Component {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{this.props.route.params.finalScore}</Text>
-        <Button title='Play Food Again!'
-        onPress={() => {this.props.navigation.navigate('Game')}}
-        >
-        </Button>
+
+        <TouchableOpacity onPress={() => {this.props.navigation.navigate('Game')}}>
+          <Text>Play {this.props.route.params.savedCategory} again!</Text>
+        </TouchableOpacity>
+
         <Button title='Play another category'
         onPress={() => {this.props.navigation.navigate('Categories')}}
         >

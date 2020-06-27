@@ -101,10 +101,6 @@ export default class GameComponent extends React.Component {
             directionalOffsetThreshold: 80
           };        
           
-          console.log('Game' + 'Syllable' + this.state.syllable)
-
-          
-
       return (
         <View>
 
@@ -124,7 +120,8 @@ export default class GameComponent extends React.Component {
                     onFinish={() => {
                         alert('Round finished!')
                         this.props.navigation.navigate('Score', {
-                            finalScore: this.state.score
+                            finalScore: this.state.score,
+                            savedCategory: this.props.route.params.category,
                         })
                     }
                     }
