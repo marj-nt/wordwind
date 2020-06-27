@@ -42,13 +42,13 @@ class HomeComponent extends React.Component {
 
         <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
           <Image style={homeStyles.icons} source={require(pathIcon2)}/>
-          <Text style={homeStyles.buttonText}>{this.state.duration}</Text>
+          <Text style={homeStyles.buttonText}>{String(this.state.syllable)}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}
         onPress={() => this.props.navigation.navigate('Options')}>
           <Image style={homeStyles.icons} source={require(pathIcon3)}/>
-          <Text style={homeStyles.buttonText}>OPTIONS</Text>
+          <Text style={homeStyles.buttonText}>{String(this.state.sfx)}</Text>
         </TouchableOpacity>
         </LinearGradient>
         </View>

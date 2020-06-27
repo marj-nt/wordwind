@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View, Text, TouchableOpacity } from "react-native";
+import { Dimensions, View, Text, TouchableOpacity, Switch } from "react-native";
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation'
@@ -14,13 +14,16 @@ class OptionsComponent extends React.Component {
         this.state = {
             color: 1,
             duration: 60,
-            syllable: 'off',
-            sfx: 'on',
+            syllable: false,
+            sfx: false,
+
+            sylSwitchValue: false,
+            sfxSwitchValue: false,
         }
         this.changeColor = this.changeColor.bind(this)
         this.changeDuration = this.changeDuration.bind(this)
-        this.changeSyllable = this.changeSyllable.bind(this)
-        this.changeSfx = this.changeSfx.bind(this)
+        this.toggleSyllable = this.toggleSyllable.bind(this)
+        this.toggleSfx = this.toggleSfx.bind(this)
     }
 
     changeColor = (chosenColor) => {
@@ -31,17 +34,28 @@ class OptionsComponent extends React.Component {
         this.setState({duration: chosenDuration})
     }
 
-    changeSyllable = (chosenSyllable) => {
-        this.setState({syllable: chosenSyllable})
-    }
-
     changeSfx = (chosenSfx) => {
         this.setState({sfx: chosenSfx})
+    }
+
+    toggleSyllable = (value) => {
+        this.setState({
+            sylSwitchValue: value,
+            syllable: !this.state.syllable,
+            })
+    }
+
+    toggleSfx = (value) => {
+        this.setState({
+            sfxSwitchValue: value,
+            sfx: !this.state.sfx,
+            })
     }
 
   render() {
     return (
       <View>
+
         <LinearGradient colors={gradientPurpleOrange}>
 
         <TouchableOpacity style={optionsStyles.toggleButtons}
@@ -75,6 +89,8 @@ class OptionsComponent extends React.Component {
                     <Text>4</Text>
                 </TouchableOpacity>
 
+                
+
 
                 <View style={optionsStyles.row}>
                     <Text>Round Duration</Text>
@@ -93,26 +109,19 @@ class OptionsComponent extends React.Component {
                 <View style={optionsStyles.row}>
                     <Text>Syllable Help</Text>
                     <View style={optionsStyles.row}>
-
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeSyllable('on')}>
-                            <Text>ON</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeSyllable('off')}>
-                            <Text>OFF</Text>
-                        </TouchableOpacity>
-
+                    <Switch
+                    style={{marginTop:30}}
+                    onValueChange = {this.toggleSyllable}
+                    value = {this.state.sylSwitchValue}/>
                     </View>
                 </View>
+
                 <View style={optionsStyles.row}>
                     <Text>Sound Effects</Text>
-                    <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeSfx('on')}>
-                            <Text>ON</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeSfx('off')}>
-                            <Text>OFF</Text>
-                        </TouchableOpacity>
+                    <Switch
+                    style={{marginTop:30}}
+                    onValueChange = {this.toggleSfx}
+                    value = {this.state.sfxSwitchValue}/>
                 </View>
             </View>
         </LinearGradient>
