@@ -7,6 +7,8 @@ import CountDown from 'react-native-countdown-component';
 import { withNavigation } from 'react-navigation'
 
 import { shuffleWord as shuffleWord } from '@components/wordShuffle.js';
+import { checkColor as checkColor } from '@components/checkColor.js';
+
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.js';
@@ -14,8 +16,8 @@ import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.j
 var TimerMixin = require('react-timer-mixin');
 
 
-const gradientBlue = ['#4C39A1', '#000C87'];
-const gradientGreen = ['green', 'white'];
+
+
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
 var initScore = 0;
@@ -46,15 +48,15 @@ export default class GameComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          randomWord: shuffleWord(this.props.route.params.category),
-          score: initScore,
-          roundTime: 3,
+            randomWord: shuffleWord(this.props.route.params.category),
+            score: initScore,
+            duration: this.props.route.params.savedDuration,
 
-          background1: String(gradientBlue[0]),
-          background2: String(gradientBlue[1]),
-          seconds: 0,
-          fill: 0,
-          timer: null,
+            seconds: 0,
+            fill: 0,
+            timer: null,
+
+            bg: checkColor(this.props.route.params.savedColor),
         };
         this.resetTimer = this.resetTimer.bind(this)
         this.increaseTimer = this.resetTimer.bind(this)
@@ -98,7 +100,7 @@ export default class GameComponent extends React.Component {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
           };        
-          var circleInterval = MAXTIME / 100;
+          console.log(this.state.duration);
 
           
 
@@ -112,12 +114,12 @@ export default class GameComponent extends React.Component {
             onSwipeRight={(state) => this.onSwipeRight(state)}
             config={config}
             >
-                <LinearGradient style={gameStyles.topContainer} colors={gradientBlue}>
+                <LinearGradient style={gameStyles.topContainer} colors={this.state.bg}>
 
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={this.state.roundTime}
+                    until={this.state.duration}
                     onFinish={() => {
                         alert('Round finished!')
                         this.props.navigation.navigate('Score', {
@@ -129,7 +131,7 @@ export default class GameComponent extends React.Component {
                     timeToShow={['S']}
                     timeLabels={[]}
                     digitStyle={{backgroundColor: 'black'}}
-                    digitTxtStyle={'white'}
+                    digitTxtStyle={{color: 'white'}}
                     />
 
                     {/* DISPLAY WORD */}

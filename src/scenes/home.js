@@ -30,14 +30,19 @@ class HomeComponent extends React.Component {
         <Image style={homeStyles.title} source={require(pathTitle)}/>
 
         <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
-        onPress={() => this.props.navigation.navigate('Categories')}>
+        onPress={() => this.props.navigation.navigate('Categories', {
+          savedColor: this.state.color,
+          savedDuration: this.state.duration,
+          savedSyllable: this.state.syllable,
+          savedSfx: this.state.sfx,
+        })}>
           <Image style={homeStyles.icons} source={require(pathIcon1)}/>
           <Text style={homeStyles.buttonText}>PLAY</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
           <Image style={homeStyles.icons} source={require(pathIcon2)}/>
-          <Text style={homeStyles.buttonText}>{this.state.color}</Text>
+          <Text style={homeStyles.buttonText}>{this.state.duration}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}

@@ -36,7 +36,17 @@ const categoriesStyles = StyleSheet.create({
 })
 
 class CategoriesComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: this.props.route.params.savedColor,
+      duration: this.props.route.params.savedDuration,
+      syllable: this.props.route.params.savedSyllable,
+      sfx: this.props.route.params.savedSfx,
+    }
+  }
   render() {
+    console.log(this.state.duration)
     return (
       <View>
           <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
@@ -53,7 +63,11 @@ class CategoriesComponent extends React.Component {
             <View style={categoriesStyles.row}>
               <TouchableOpacity style={categoriesStyles.centerImage}
                 onPress={() => this.props.navigation.navigate('Game', {
-                  category: 'sports'
+                  category: 'sports',
+                  savedColor: this.state.color,
+                  savedDuration: this.state.duration,
+                  savedSyllable: this.state.syllable,
+                  savedSfx: this.state.sfx,
                 })}
               >
                 <Image  source={require(catIcon1)}/>
