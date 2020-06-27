@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation'
+import * as Animatable from 'react-native-animatable';
 
 import { homeStyles as homeStyles } from '@styles/home.js'
 
@@ -27,29 +28,39 @@ class HomeComponent extends React.Component {
   return (
     <View>
         <LinearGradient style={homeStyles.mainBackground} colors={gradientBlueGreen}>
-        <Image style={homeStyles.title} source={require(pathTitle)}/>
 
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
-        onPress={() => this.props.navigation.navigate('Categories', {
-          savedColor: this.state.color,
-          savedDuration: this.state.duration,
-          savedSyllable: this.state.syllable,
-          savedSfx: this.state.sfx,
-        })}>
-          <Image style={homeStyles.icons} source={require(pathIcon1)}/>
-          <Text style={homeStyles.buttonText}>PLAY</Text>
-        </TouchableOpacity>
+        <Animatable.View animation='tada' duration={2000} iterationCount={"infinite"} iterationDelay={1000}>
+          <Image style={homeStyles.title} source={require(pathTitle)}/>
+        </Animatable.View>
 
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
-          <Image style={homeStyles.icons} source={require(pathIcon2)}/>
-          <Text style={homeStyles.buttonText}>{String(this.state.syllable)}</Text>
-        </TouchableOpacity>
+          <Animatable.View animation='fadeInUp'>
+            <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
+            onPress={() => this.props.navigation.navigate('Categories', {
+              savedColor: this.state.color,
+              savedDuration: this.state.duration,
+              savedSyllable: this.state.syllable,
+              savedSfx: this.state.sfx,
+            })}>
+              <Image style={homeStyles.icons} source={require(pathIcon1)}/>
+              <Text style={homeStyles.buttonText}>PLAY</Text>
+            </TouchableOpacity>
+          </Animatable.View>
 
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}
-        onPress={() => this.props.navigation.navigate('Options')}>
-          <Image style={homeStyles.icons} source={require(pathIcon3)}/>
-          <Text style={homeStyles.buttonText}>{String(this.state.sfx)}</Text>
-        </TouchableOpacity>
+          <Animatable.View animation='fadeInLeft'>
+            <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
+              <Image style={homeStyles.icons} source={require(pathIcon2)}/>
+              <Text style={homeStyles.buttonText}>TUTORIAL</Text>
+            </TouchableOpacity>
+          </Animatable.View>
+
+          <Animatable.View animation='fadeInRight'>
+            <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}
+            onPress={() => this.props.navigation.navigate('Options')}>
+              <Image style={homeStyles.icons} source={require(pathIcon3)}/>
+              <Text style={homeStyles.buttonText}>OPTIONS</Text>
+            </TouchableOpacity>
+          </Animatable.View>
+
         </LinearGradient>
         </View>
   )

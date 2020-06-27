@@ -50,6 +50,7 @@ export const homeStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 1,
     elevation: 1,
+    marginLeft: 40,
   },
   playButton: {
     backgroundColor: buttonSalmon,
