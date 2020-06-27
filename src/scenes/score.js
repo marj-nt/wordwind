@@ -2,13 +2,23 @@ import React from 'react'
 import { View, Text, Button, TouchableOpacity, StyleSheet, Dimensions, Image, } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { withNavigation } from 'react-navigation'
+import * as Animatable from 'react-native-animatable';
+
+import iconPath from '@assets/score-mic.png'
+import bannerPath from '@assets/score-banner.png'
 
 import { scoreStyles as scoreStyles } from '@styles/score.js'
 
 const gradientBlueGreen = ['#70FAA8', '#A2B0FF'];
 
-const iconPath = '../assets/score-mic.png';
-const bannerPath = '../assets/score-banner.png';
+const upAndDown = {
+  from: {
+    top: 30,
+  },
+  to: {
+    top: 20,
+  },
+};
 
 class ScoreComponent extends React.Component {
     render() {
@@ -16,13 +26,17 @@ class ScoreComponent extends React.Component {
         <View>
           <LinearGradient colors={gradientBlueGreen}>
 
-          <Image style={scoreStyles.imgBanner} source={require(bannerPath)}/>
+          {/*Animate floating banner*/}
+          <Animatable.View animation={upAndDown} iterationCount={'infinite'} direction="alternate">
+            <Image style={scoreStyles.imgBanner} source={bannerPath}/>
+          </Animatable.View>
 
           <View style={scoreStyles.mainBackground}>
 
-            <View style={scoreStyles.whiteBackground}>
+            <Animatable.View style={scoreStyles.whiteBackground} animation='fadeInUp' onTransitionEnd={scoreStyles.whiteBackground}>
+            
 
-              <Image style={scoreStyles.imgMic} source={require(iconPath)}/>
+              <Image style={scoreStyles.imgMic} source={iconPath}/>
 
        
                 <Text style={scoreStyles.successText}>Success!</Text>
@@ -39,7 +53,8 @@ class ScoreComponent extends React.Component {
                 <Text>Play another category</Text>
               </TouchableOpacity>
 
-            </View>
+            
+            </Animatable.View>
 
 
             
