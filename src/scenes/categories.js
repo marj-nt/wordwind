@@ -46,7 +46,8 @@ class CategoriesComponent extends React.Component {
     }
   }
   render() {
-    console.log(this.state.duration)
+    console.log('Categories' + 'Syllable' + this.state.syllable)
+
     return (
       <View>
           <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>

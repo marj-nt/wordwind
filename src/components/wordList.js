@@ -41,4 +41,4 @@ export const colorsListSyl = ['rose red', 'yel-low', 'or-ange', 'pur-ple', 'aq-u
 // Always 1 syllable for easy playing
 export const kidsList = ['cat', 'dog', 'ball', 'fun', 'moon', 'food', 'pool', 'water', 'tree', 'duck', 'car',
 'bee', 'book', 'bat', 'leaf', 'sheep', 'leg', 'hug', 'meet', 'jam', 'big', 'mop', 'buzz', 'evil', 'fart',
-'spoon', 'maze', 'oven', 'pig'];
+'spoon', 'maze', 'stop', 'pig'];

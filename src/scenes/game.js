@@ -48,7 +48,7 @@ export default class GameComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            randomWord: shuffleWord(this.props.route.params.category),
+            randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
             score: initScore,
             duration: this.props.route.params.savedDuration,
 
@@ -65,14 +65,14 @@ export default class GameComponent extends React.Component {
     // Swipe handlers
     onSwipeLeft(gestureState) {
     this.setState({
-        randomWord: shuffleWord(this.props.route.params.category),
+        randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
         score: this.state.score + 1,
     });
     }
     
     onSwipeRight(gestureState) {
     this.setState({
-        randomWord: shuffleWord(this.props.route.params.category),
+        randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
         score: this.state.score + 1,
     });
     }
@@ -100,7 +100,8 @@ export default class GameComponent extends React.Component {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
           };        
-          console.log(this.state.duration);
+          
+          console.log('Game' + 'Syllable' + this.state.syllable)
 
           
 
@@ -119,7 +120,7 @@ export default class GameComponent extends React.Component {
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={this.state.duration}
+                    until={30}
                     onFinish={() => {
                         alert('Round finished!')
                         this.props.navigation.navigate('Score', {
