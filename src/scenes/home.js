@@ -13,6 +13,16 @@ const pathIcon2 = '../assets/home-tutorial-icon.png';
 const pathIcon3 = '../assets/home-options-icon.png';
 
 class HomeComponent extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: this.props.route.params.savedColor,
+      duration: this.props.route.params.savedDuration,
+      syllable: this.props.route.params.savedSyllable,
+      sfx: this.props.route.params.savedSfx,
+    }
+  }
   render() {
   return (
     <View>
@@ -25,19 +35,13 @@ class HomeComponent extends React.Component {
           <Text style={homeStyles.buttonText}>PLAY</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}
-        onPress={() => {
-          this.props.navigation.navigate('Score', {
-            user: 'hi',
-          });
-        }
-        
-        }>
+        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
           <Image style={homeStyles.icons} source={require(pathIcon2)}/>
-          <Text style={homeStyles.buttonText}>TUTORIAL</Text>
+          <Text style={homeStyles.buttonText}>{this.state.color}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}>
+        <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.optionsButton]}
+        onPress={() => this.props.navigation.navigate('Options')}>
           <Image style={homeStyles.icons} source={require(pathIcon3)}/>
           <Text style={homeStyles.buttonText}>OPTIONS</Text>
         </TouchableOpacity>

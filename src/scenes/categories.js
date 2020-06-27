@@ -42,6 +42,12 @@ class CategoriesComponent extends React.Component {
           <LinearGradient style={categoriesStyles.mainBackground} colors={gradientBlueGreen}>
             <View style={categoriesStyles.row}>
             <Text>Categories</Text>
+
+            <TouchableOpacity style={{backgroundColor: 'white'}}
+                onPress={() => this.props.navigation.navigate('Home')}>
+              <Text>Back</Text>
+            </TouchableOpacity>
+
             </View>
             
             <View style={categoriesStyles.row}>

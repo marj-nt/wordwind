@@ -6,6 +6,7 @@ import HomeComponent from '@screens/home.js'
 import CategoriesComponent from '@screens/categories.js'
 import GameComponent from '@screens/game.js'
 import ScoreComponent from '@screens/score.js'
+import OptionsComponent from '@screens/options.js'
 
 
 const Stack = createStackNavigator()
@@ -14,7 +15,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
     <Stack.Navigator 
-        initialRouteName='Categories'
+        initialRouteName='Options'
         screenOptions={{headerShown: false}}
         defaultNavigationOptions={{gesturesEnabled: false}}
     >
@@ -33,6 +34,10 @@ function MainStackNavigator() {
     <Stack.Screen
       name='Score'
       component={ScoreComponent}
+    />
+    <Stack.Screen
+      name='Options'
+      component={OptionsComponent}
     />
   </Stack.Navigator>
     </NavigationContainer>
