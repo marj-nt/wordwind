@@ -6,6 +6,7 @@ import CategoriesComponent from '@screens/categories.js';
 import GameComponent from '@screens/game.js';
 import ScoreComponent from '@screens/score.js'
 import OptionsComponent from '@screens/options.js'
+import TutorialComponent from '@screens/tutorial.js'
 
 import MainStackNavigator from './src/navigations/MainStackNavigation'
 

@@ -47,7 +47,8 @@ class HomeComponent extends React.Component {
           </Animatable.View>
 
           <Animatable.View animation='fadeInLeft'>
-            <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}>
+            <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.tutorialButton]}
+            onPress={() => this.props.navigation.navigate('Tutorial')}>
               <Image style={homeStyles.icons} source={require(pathIcon2)}/>
               <Text style={homeStyles.buttonText}>TUTORIAL</Text>
             </TouchableOpacity>

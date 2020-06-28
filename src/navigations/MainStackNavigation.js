@@ -7,6 +7,7 @@ import CategoriesComponent from '@screens/categories.js'
 import GameComponent from '@screens/game.js'
 import ScoreComponent from '@screens/score.js'
 import OptionsComponent from '@screens/options.js'
+import TutorialComponent from '@screens/tutorial.js'
 
 
 const Stack = createStackNavigator()
@@ -38,6 +39,10 @@ function MainStackNavigator() {
     <Stack.Screen
       name='Options'
       component={OptionsComponent}
+    />
+    <Stack.Screen
+      name='Tutorial'
+      component={TutorialComponent}
     />
   </Stack.Navigator>
     </NavigationContainer>
