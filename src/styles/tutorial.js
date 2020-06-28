@@ -75,7 +75,7 @@ export const tutorialStyles = StyleSheet.create({
     tooltipText: {
       fontFamily: 'Avenir Next',
       textAlign: 'center',
-      fontSize: 12,
+      fontSize: 13,
     },
     tooltipOuter: {
       shadowColor: 'black',
@@ -97,5 +97,12 @@ export const tutorialStyles = StyleSheet.create({
       left: 0,
       opacity: 1,
       zIndex: 1,
+    },
+    tutorialGestures: {
+      width: 150,
+      resizeMode: 'contain',
+      position: 'absolute',
+      top: 225,
+      zIndex: 2,
     }
   })

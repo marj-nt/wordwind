@@ -3,22 +3,38 @@ import { Dimensions, View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { MyTooltip } from '@components/MyTooltip.js'
+import * as Animatable from 'react-native-animatable';
 
 import { withNavigation } from 'react-navigation'
-import { useNavigation, NavigationContainer } from '@react-navigation/native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import {tutorialStyles as tutorialStyles, tutorialColors as tutorialColors} from '@styles/tutorial.js';
 import { msgArray as msgArray, dirArray as dirArray, disTopArray as disTopArray, disBotArray as disBotArray, 
     wordArray as wordArray, wordPosArray as wordPosArray, topArray as topArray, leftArray as leftArray } from '@components/tutorialArrays.js'
 
-import overlay from '@assets/overlay.png'
-
-var width = Dimensions.get('window').width; //full width
-var height = Dimensions.get('window').height; //full height
+import overlay from '@assets/overlay.png';
+import tutorialShake from '@assets/tutorial-shake.png';
+import tutorialSwipe from '@assets/tutorial-swipe.png';
 
 const gradientBlue = ['#4C39A1', '#000C87'];
-const gradientBottom = ['#B8EBFC', '#E3E1FF']
+const gradientBottom = ['#B8EBFC', '#E3E1FF'];
+
+const shakeAnim = {
+    from: {
+      transform: [{rotate: '-10deg'}],
+    },
+    to: {
+      transform: [{rotate: '10deg'}],
+    },
+  };
+
+  const swipeAnim = {
+    from: {
+      left: 50,
+    },
+    to: {
+      left: 200,
+    },
+  };
 
 export default class TutorialComponent extends React.Component { 
 
@@ -38,12 +54,15 @@ export default class TutorialComponent extends React.Component {
             top: topArray[0],
             left: leftArray[0],
 
+            shakeDisplay: 'none',
+            swipeDisplay: 'none',
+
         }
-        this.testPrint = this.testPrint.bind(this);
+        this.handlePress = this.handlePress.bind(this);
         this.nextScreen = this.nextScreen.bind(this);
     }
 
-    testPrint() {
+    handlePress() {
         if(this.state.progress < msgArray.length - 1) {
             this.nextScreen(this.state.progress + 1)
         } else {
@@ -52,6 +71,20 @@ export default class TutorialComponent extends React.Component {
     }
 
     nextScreen(progress) {
+        if(progress === 7) {
+            this.setState({
+                shakeDisplay: 'flex',
+            })
+        } else if(progress === 8) {
+            this.setState({
+                shakeDisplay: 'none',
+                swipeDisplay: 'flex',
+            })
+        } else if(progress === 9) {
+            this.setState({
+                swipeDisplay: 'none',
+            })
+        }
         this.setState({
             msg: msgArray[progress],
             direction: dirArray[progress],
@@ -74,7 +107,7 @@ export default class TutorialComponent extends React.Component {
 
         
 
-            <TouchableOpacity activeOpacity={0.95} onPress={this.testPrint}>
+            <TouchableOpacity activeOpacity={0.95} onPress={this.handlePress}>
 
             {/* TOP CONTAINER */}
 
@@ -94,6 +127,16 @@ export default class TutorialComponent extends React.Component {
                     <Text style={[tutorialStyles.wordFont, {zIndex: this.state.wordPos}]}>{this.state.word}</Text>
                  
                     <Image style={tutorialStyles.shadowOverlay} source={overlay}/>
+
+                    <Animatable.Image style={[tutorialStyles.tutorialGestures, {display: this.state.shakeDisplay}]} 
+                    source={tutorialShake} animation={shakeAnim} iterationCount={'infinite'} direction="alternate"
+                    duration={150}>
+                    </Animatable.Image>
+
+                    <Animatable.Image style={[tutorialStyles.tutorialGestures, {display: this.state.swipeDisplay}]} 
+                    source={tutorialSwipe} animation={swipeAnim} iterationCount={'infinite'}
+                    duration={1250}>
+                    </Animatable.Image>
                     
                 </LinearGradient>
 
