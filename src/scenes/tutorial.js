@@ -9,6 +9,8 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import {tutorialStyles as tutorialStyles, tutorialColors as tutorialColors} from '@styles/tutorial.js';
+import { msgArray as msgArray, dirArray as dirArray, disTopArray as disTopArray, disBotArray as disBotArray, 
+    wordArray as wordArray, wordPosArray as wordPosArray, topArray as topArray, leftArray as leftArray } from '@components/tutorialArrays.js'
 
 import overlay from '@assets/overlay.png'
 
@@ -18,45 +20,23 @@ var height = Dimensions.get('window').height; //full height
 const gradientBlue = ['#4C39A1', '#000C87'];
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
-const msgArray = ['Welcome to WordWind!\n\nTest your reading skills by having other players guess what you’re saying - backwards!\n\n(tap anywhere to continue)',
-                'Let’s start simple: Try to figure out how to say “FUN” backwards!',
-                'Let’s start simple Once you’re ready to read out loud, hold the red record button and say NUFFF!',
-                'Release when you are done to end the recording',
-                'Stumbled and want to try again?\n\nRecord until you get it right!',
-                'Once you’re ready, tap the play button to let your friends hear in reverse so it sounds “normal”!',
-                'The goal is for everyone to guess the original words before time runs out!',
-                'If no one can guess it\n\nSHAKE\n\nthe device for a new word',
-                'If someone gets it right\n\nSWIPE either left or right to get a point!',
-                'TIPS\n\nThink of breaking up bigger words into syllables!\n\n(Or turn  on syllable help in options)',
-                'Don’t be afraid to sound silly and over-pronounce!',
-                ]
-
-const dirArray = [
-    'up', 'up', 'up', 'down', 'down', 'down', 'down', 'down', 'down', 'down', 'down'
-]
-
-const disTopArray = [
-    'block', 'block', 'block', 'none', 'none', 'none', 'none', 'none', 'none', 'none', 'none',
-]
-
-const disBotArray = [
-    'none', 'none', 'none', 'block', 'block', 'block', 'block', 'block', 'block', 'block'
-]
-
 export default class TutorialComponent extends React.Component { 
 
     constructor(props) {
         super(props)
         this.state = {
-            word: 'WORD',
+            
             progress: 0,
-            left: width / 3.5,
-            top: 271,
-
+            
+            word: wordArray[0],
             msg: msgArray[0],
             direction: dirArray[0],
             displayTop: disTopArray[0],
             displayBottom: disBotArray[0],
+
+            wordPos: wordPosArray[0],
+            top: topArray[0],
+            left: leftArray[0],
 
         }
         this.testPrint = this.testPrint.bind(this);
@@ -77,6 +57,12 @@ export default class TutorialComponent extends React.Component {
             direction: dirArray[progress],
             displayTop: disTopArray[progress],
             displayBottom: disBotArray[progress],
+            word: wordArray[progress],
+
+            wordPos: wordPosArray[progress],
+            top: topArray[progress],
+            left: leftArray[progress],
+
             progress: this.state.progress + 1,
         })
     }
@@ -86,15 +72,15 @@ export default class TutorialComponent extends React.Component {
       return (
         <View>
 
+        
+
             <TouchableOpacity activeOpacity={0.95} onPress={this.testPrint}>
 
             {/* TOP CONTAINER */}
 
                 <LinearGradient style={tutorialStyles.topContainer} colors={gradientBlue}>
 
-                    {/* DISPLAY WORD */}
-
-                    <MyTooltip 
+                <MyTooltip 
                     direction={this.state.direction} 
                     left={this.state.left} 
                     top={this.state.top} 
@@ -102,8 +88,10 @@ export default class TutorialComponent extends React.Component {
                     displayTop={this.state.displayTop}
                     displayBottom={this.state.displayBottom}
                     />
+
+                    {/* DISPLAY WORD */}
                     
-                    <Text style={tutorialStyles.wordFont}>{this.state.word}</Text>
+                    <Text style={[tutorialStyles.wordFont, {zIndex: this.state.wordPos}]}>{this.state.word}</Text>
                  
                     <Image style={tutorialStyles.shadowOverlay} source={overlay}/>
                     
