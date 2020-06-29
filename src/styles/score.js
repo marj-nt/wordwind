@@ -58,5 +58,5 @@ export const scoreStyles = StyleSheet.create({
   },
   imgBanner: {
     top: 20,
-  }
+  },
 });

@@ -51,7 +51,7 @@ export const tutorialStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        top: 20
+        top: 20,
     },
     recContainer: {
       width: 140,

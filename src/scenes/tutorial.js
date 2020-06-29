@@ -62,6 +62,7 @@ export default class TutorialComponent extends React.Component {
             displayBottom: disBotArray[0],
 
             wordPos: wordPosArray[0],
+            recPos: 2,
             top: topArray[0],
             left: leftArray[0],
 
@@ -197,9 +198,9 @@ export default class TutorialComponent extends React.Component {
 
             <LinearGradient style={tutorialStyles.bottomContainer} colors={tutorialColors.gradientBottom}>
             <View style={tutorialStyles.row}>
-                <View style={tutorialStyles.recContainer}>
+                <View style={[tutorialStyles.recContainer, {zIndex: this.state.recPos}]}>
 
-                    <TouchableOpacity style={[tutorialStyles.recButton, {zIndex: 2}]} onPress={this.onButtonPress}>
+                    <TouchableOpacity style={[tutorialStyles.recButton]}>
                         <Text>REC</Text>
                     </TouchableOpacity>
 

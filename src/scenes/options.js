@@ -1,10 +1,14 @@
 import React from "react";
-import { Dimensions, View, Text, TouchableOpacity, Switch } from "react-native";
+import { Dimensions, View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation'
 
-import { optionsStyles as optionsStyles } from '@styles/options.js'
+import { optionsStyles as optionsStyles } from '@styles/options.js';
+import { optionsColors as optionsColors } from '@styles/options.js';
+import { gradientBlue, gradientOrange, gradientPurple, gradientBlack } from '@styles/options.js';
+
+import optionsGear from '@assets/options-gear.png';
 
 const gradientPurpleOrange = ['#B0B5FF', '#F4D8A8'];
 
@@ -72,56 +76,77 @@ class OptionsComponent extends React.Component {
 
 
             <View style={optionsStyles.mainBackground}>
-                <View style={optionsStyles.row}>
-                    <Text>Background Color</Text>
-                </View>
 
-                <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeColor(1)}>
-                    <Text>1</Text>
+            <View style={optionsStyles.whiteBackground}>
+
+                <Image style={optionsStyles.imgGear} source={optionsGear}/>
+
+                <Text style={optionsStyles.labelText}>Background Color</Text>
+                
+                <View style={optionsStyles.row}>
+
+                <TouchableOpacity onPress={() => this.changeColor(1)}>
+                    <LinearGradient colors={gradientBlue} style={optionsStyles.colorSwatches}>
+                    <Text style={optionsStyles.hideText}>1</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeColor(2)}>
-                    <Text>2</Text>
+                <TouchableOpacity onPress={() => this.changeColor(2)}>
+                    <LinearGradient colors={gradientOrange} style={optionsStyles.colorSwatches}>
+                    <Text style={optionsStyles.hideText}>2</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeColor(3)}>
-                    <Text>3</Text>
+                <TouchableOpacity onPress={() => this.changeColor(3)}>
+                    <LinearGradient colors={gradientPurple} style={optionsStyles.colorSwatches}>
+                    <Text style={optionsStyles.hideText}>3</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeColor(4)}>
-                    <Text>4</Text>
+                <TouchableOpacity onPress={() => this.changeColor(4)}>
+                    <LinearGradient colors={gradientBlack} style={optionsStyles.colorSwatches}>
+                    <Text style={optionsStyles.hideText}>4</Text>
+                    </LinearGradient>
                 </TouchableOpacity>
+
+                </View>
 
                 
 
 
-                <View style={optionsStyles.row}>
-                    <Text>Round Duration</Text>
+
+                    <Text style={optionsStyles.labelText}>Round Duration</Text>
                     <View style={optionsStyles.row}>
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeDuration(30)}>
-                            <Text>30</Text>
+                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(30)}>
+                            <Text style={optionsStyles.buttonText}>30</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeDuration(60)}>
-                            <Text>60</Text>
+                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(60)}>
+                            <Text style={optionsStyles.buttonText}>60</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={optionsStyles.toggleButtons} onPress={() => this.changeDuration(90)}>
-                            <Text>90</Text>
+                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(90)}>
+                            <Text style={optionsStyles.buttonText}>90</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
-                <View style={optionsStyles.row}>
-                    <Text>Syllable Help</Text>
+                
                     <View style={optionsStyles.row}>
+                    <Text style={optionsStyles.labelText}>Syllable Help</Text>
                     <Switch
-                    style={{marginTop:30}}
+                    style={optionsStyles.switchDistance}
+                    trackColor={{ true: "#81b0ff" }}
+                    ios_backgroundColor={'lightgrey'}
                     onValueChange = {this.toggleSyllable}
                     value = {this.state.sylSwitchValue}/>
                     </View>
-                </View>
+        
 
-                <View style={optionsStyles.row}>
-                    <Text>Sound Effects</Text>
+                    <View style={optionsStyles.row}>
+
+                    <Text style={optionsStyles.labelText}>Sound Effects</Text>
                     <Switch
-                    style={{marginTop:30}}
+                    style={optionsStyles.switchDistance}
+                    trackColor={{ true: "#81b0ff" }}
+                    ios_backgroundColor={'lightgrey'}
                     onValueChange = {this.toggleSfx}
                     value = {this.state.sfxSwitchValue}/>
+                    </View>
+
                 </View>
             </View>
         </LinearGradient>
