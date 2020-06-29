@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
-import { BackButton, Triangle } from '@components/BackButton.js';
+import { BackButton } from '@components/BackButton.js';
 
 import { optionsStyles as optionsStyles } from '@styles/options.js';
 import { optionsColors as optionsColors } from '@styles/options.js';
@@ -78,7 +78,7 @@ class OptionsComponent extends React.Component {
     return (
       <View>
 
-        <LinearGradient colors={gradientPurpleOrange}>
+        <LinearGradient style={optionsStyles.mainBackground} colors={gradientPurpleOrange}>
 
         <View style={globalStyles.backContainer}>
         <TouchableOpacity
@@ -87,8 +87,7 @@ class OptionsComponent extends React.Component {
                     savedDuration: this.state.duration,
                     savedSyllable: this.state.syllable,
                     savedSfx: this.state.sfx,
-                }
-                )}
+                })}
               >
                 <BackButton/>
         </TouchableOpacity>
@@ -97,7 +96,7 @@ class OptionsComponent extends React.Component {
         
 
 
-            <View style={optionsStyles.mainBackground}>
+            
 
             <View style={optionsStyles.animatedContainer}>
             <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
@@ -188,7 +187,7 @@ class OptionsComponent extends React.Component {
                     </View>
 
                 </View>
-            </View>
+         
 
             
 

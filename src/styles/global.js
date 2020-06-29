@@ -26,7 +26,7 @@ export const globalStyles = StyleSheet.create({
       width: 50,
       height: 50,
       zIndex: 1,
-      alignSelf: 'flex-start',
+      position: 'absolute',
     //   borderColor: 'black',
     //   borderWidth: 2,
       top: 20,
