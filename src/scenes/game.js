@@ -148,14 +148,14 @@ export default class GameComponent extends React.Component {
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={0}
-                    // onFinish={() => {
-                    //     this.props.navigation.navigate('Score', {
-                    //         finalScore: this.state.score,
-                    //         savedCategory: this.props.route.params.category,
-                    //     })
-                    // }
-                    // }
+                    until={5}
+                    onFinish={() =>
+                        this.props.navigation.navigate('Score', {
+                            finalScore: this.state.score,
+                            savedCategory: this.props.route.params.category,
+                            outcome: 'success'
+                        })
+                    }
                     size={20}
                     timeToShow={['S']}
                     timeLabels={[]}

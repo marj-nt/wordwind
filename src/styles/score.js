@@ -11,6 +11,7 @@ export const scoreStyles = StyleSheet.create({
     width: width,
     height: height,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   whiteBackground: {
     width: 280,
@@ -20,6 +21,7 @@ export const scoreStyles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 'auto',
     paddingBottom: 20,
+    zIndex: 2,
   },
   row: {
     flex: 1,
@@ -28,6 +30,14 @@ export const scoreStyles = StyleSheet.create({
   },
   successText: {
     color: 'green',
+    fontSize: 20,
+    fontFamily: 'Avenir Next',
+    fontWeight: 'bold',
+    marginTop: -40,
+    marginBottom: 20,
+  },
+  failText: {
+    color: 'red',
     fontSize: 20,
     fontFamily: 'Avenir Next',
     fontWeight: 'bold',
@@ -58,5 +68,15 @@ export const scoreStyles = StyleSheet.create({
   },
   imgBanner: {
     top: 20,
+  },
+  shadowOverlay: {
+    width: width,
+    height: height,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: 'black',
+    opacity: 0.2,
+    zIndex: 0,
   },
 });

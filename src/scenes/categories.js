@@ -42,7 +42,7 @@ class CategoriesComponent extends React.Component {
     this.setState({ fontsLoaded: true });
   }
 
-  componentDidMount() {
+  UNSAFE_componentDidMount() {
     this._loadFontsAsync();
   }
 

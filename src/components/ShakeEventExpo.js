@@ -2,7 +2,7 @@
 
 import { Accelerometer } from 'expo-sensors';
 //this is shake sensitivity - lowering this will give high sensitivity and increasing this will give lower sensitivity
-const THRESHOLD = 500;
+const THRESHOLD = 100;
 export class ShakeEventExpo {
 static addListener(handler) {
 let
