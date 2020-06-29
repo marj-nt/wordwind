@@ -104,5 +104,19 @@ export const tutorialStyles = StyleSheet.create({
       position: 'absolute',
       top: 225,
       zIndex: 2,
-    }
+    },
+    progressBar: {
+      height: 20,
+      top: height - 20,
+      left: 0,
+      position: 'absolute',
+      zIndex: 2,
+    },
+    animatedBox:
+    {
+        position: 'absolute',
+        left: 0,
+       height: 20,
+       top: height - 20,
+    },
   })
