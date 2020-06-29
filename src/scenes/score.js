@@ -21,7 +21,7 @@ const upAndDown = {
   },
 };
 
-class SuccessScreen extends React.Component{
+export class SuccessScreen extends React.Component{
   constructor(props){
     super(props)
   }
@@ -68,7 +68,7 @@ class SuccessScreen extends React.Component{
   }
 }
 
-class FailScreen extends React.Component{
+export class FailScreen extends React.Component{
   constructor(props){
     super(props)
   }
@@ -87,6 +87,7 @@ class FailScreen extends React.Component{
   
             <Text style={scoreStyles.failText}>Try Again!!!</Text>
     
+            <Text style={scoreStyles.bodyText}>You got through {this.props.score} words.</Text>
             <Text style={scoreStyles.bodyText}>Hint: If you’re stuck, try breaking words down into syllables!</Text>
             <Text style={scoreStyles.bodyText}>(or turn on Syllable help in OPTIONS)</Text>
         
@@ -120,9 +121,11 @@ class ScoreComponent extends React.Component {
 
     render() {
       if (this.props.route.params.finalScore > 5) {
-        screen = <SuccessScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}/>;
+        screen = <SuccessScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}
+        navigation={this.props.navigation}/>;
       } else {
-        screen = <FailScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}/>
+        screen = <FailScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}
+        navigation={this.props.navigation}/>
       }
       return(
         <View>

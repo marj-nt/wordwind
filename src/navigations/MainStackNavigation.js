@@ -9,6 +9,9 @@ import ScoreComponent from '@screens/score.js'
 import OptionsComponent from '@screens/options.js'
 import TutorialComponent from '@screens/tutorial.js'
 
+import SuccessScreen from '@screens/score.js'
+import FailScreen from '@screens/score.js'
+
 
 const Stack = createStackNavigator()
 
@@ -41,8 +44,12 @@ function MainStackNavigator() {
       component={OptionsComponent}
     />
     <Stack.Screen
-      name='Tutorial'
-      component={TutorialComponent}
+      name='Success'
+      component={SuccessScreen}
+    />
+    <Stack.Screen
+      name='Fail'
+      component={FailScreen}
     />
   </Stack.Navigator>
     </NavigationContainer>
