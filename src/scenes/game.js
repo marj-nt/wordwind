@@ -49,6 +49,7 @@ export default class GameComponent extends React.Component {
         super(props);
         this.state = {
             randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
+            wordColor: 'white',
             score: initScore,
             duration: this.props.route.params.savedDuration,
 
@@ -62,19 +63,26 @@ export default class GameComponent extends React.Component {
         this.increaseTimer = this.resetTimer.bind(this)
     }
 
+    addPoint(gestureState) {
+        this.setState({
+            wordColor: gameColors.correctGreen,
+            score: this.state.score + 1,
+        })
+        setTimeout(() => {
+            this.setState({
+                wordColor: 'white',
+                randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
+            })
+        }, 200);
+    }
+
     // Swipe handlers
     onSwipeLeft(gestureState) {
-    this.setState({
-        randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
-        score: this.state.score + 1,
-    });
+        this.addPoint(gestureState)
     }
     
     onSwipeRight(gestureState) {
-    this.setState({
-        randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
-        score: this.state.score + 1,
-    });
+        this.addPoint(gestureState)
     }
 
     increaseTimer = () => {
@@ -107,8 +115,8 @@ export default class GameComponent extends React.Component {
             {/* TOP CONTAINER */}
 
             <GestureRecognizer
-            onSwipeLeft={(state) => this.onSwipeLeft(state)}
-            onSwipeRight={(state) => this.onSwipeRight(state)}
+            onSwipeLeft={(state) => this.addPoint(state)}
+            onSwipeRight={(state) => this.addPoint(state)}
             config={config}
             >
                 <LinearGradient style={gameStyles.topContainer} colors={this.state.bg}>
@@ -116,23 +124,23 @@ export default class GameComponent extends React.Component {
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={5}
-                    onFinish={() => {
-                        this.props.navigation.navigate('Score', {
-                            finalScore: this.state.score,
-                            savedCategory: this.props.route.params.category,
-                        })
-                    }
-                    }
+                    until={0}
+                    // onFinish={() => {
+                    //     this.props.navigation.navigate('Score', {
+                    //         finalScore: this.state.score,
+                    //         savedCategory: this.props.route.params.category,
+                    //     })
+                    // }
+                    // }
                     size={20}
                     timeToShow={['S']}
                     timeLabels={[]}
-                    digitStyle={{backgroundColor: 'black'}}
+                    digitStyle={{backgroundColor: 'transparent'}}
                     digitTxtStyle={{color: 'white'}}
                     />
 
                     {/* DISPLAY WORD */}
-                    <Text style={gameStyles.wordFont}>{this.state.randomWord}</Text>
+                    <Text style={[gameStyles.wordFont, {color: this.state.wordColor}]}>{this.state.randomWord}</Text>
 
                 </LinearGradient>
 

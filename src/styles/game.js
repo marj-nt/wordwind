@@ -11,6 +11,7 @@ export const gameColors = {
     gradientBottom: ['#B8EBFC', '#E3E1FF'],
     gradientRec: ['#E7442E', '#E7442E'],
     shadowYellow: '#F8E71C',
+    correctGreen: '#CAFF90',
 }
 
 export const gameStyles = StyleSheet.create({
