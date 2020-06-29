@@ -2,15 +2,21 @@ import React from "react";
 import { Dimensions, View, Text, TouchableOpacity, Switch, Image } from "react-native";
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from 'react-navigation';
+import * as Animatable from 'react-native-animatable';
+import { BackButton, Triangle } from '@components/BackButton.js';
 
 import { optionsStyles as optionsStyles } from '@styles/options.js';
 import { optionsColors as optionsColors } from '@styles/options.js';
 import { gradientBlue, gradientOrange, gradientPurple, gradientBlack } from '@styles/options.js';
+import { globalStyles as globalStyles } from '@styles/global.js'
 
 import optionsGear from '@assets/options-gear.png';
 
 const gradientPurpleOrange = ['#B0B5FF', '#F4D8A8'];
+
+var width = Dimensions.get('screen').width; //full width
+var height = Dimensions.get('screen').height; //full width
 
 class OptionsComponent extends React.Component {
     constructor(props) {
@@ -57,12 +63,25 @@ class OptionsComponent extends React.Component {
     }
 
   render() {
+
+    const grow = {
+        from: {
+          height: 30,
+          top: 25,
+        },
+        to: {
+          height: 50,
+          top: 50,
+        },
+      };
+
     return (
       <View>
 
         <LinearGradient colors={gradientPurpleOrange}>
 
-        <TouchableOpacity style={optionsStyles.toggleButtons}
+        <View style={globalStyles.backContainer}>
+        <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Home', {
                     savedColor: this.state.color,
                     savedDuration: this.state.duration,
@@ -71,11 +90,32 @@ class OptionsComponent extends React.Component {
                 }
                 )}
               >
-          <Text>Back</Text>
+                <BackButton/>
         </TouchableOpacity>
+        </View>
+
+        
 
 
             <View style={optionsStyles.mainBackground}>
+
+            <View style={optionsStyles.animatedContainer}>
+            <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
+                
+          </Animatable.View>
+          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={400} iterationCount={'infinite'} direction="alternate">
+                
+          </Animatable.View>
+          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={800} iterationCount={'infinite'} direction="alternate">
+              
+          </Animatable.View>
+          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={400} iterationCount={'infinite'} direction="alternate">
+              
+          </Animatable.View>
+          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
+               
+          </Animatable.View>
+          </View>
 
             <View style={optionsStyles.whiteBackground}>
 
@@ -149,7 +189,12 @@ class OptionsComponent extends React.Component {
 
                 </View>
             </View>
+
+            
+
         </LinearGradient>
+
+        
           
         </View>
     )
