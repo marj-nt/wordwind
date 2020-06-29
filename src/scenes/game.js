@@ -3,6 +3,7 @@ import { Dimensions, View, Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
+import { ShakeEventExpo as ShakeEventExpo } from '@components/ShakeEventExpo.js'
 
 import { withNavigation } from 'react-navigation'
 
@@ -63,6 +64,17 @@ export default class GameComponent extends React.Component {
         this.increaseTimer = this.resetTimer.bind(this)
     }
 
+    async UNSAFE_componentWillMount() {
+        ShakeEventExpo.addListener(() => {
+          //add your code here
+          this.noPoint();
+        });
+       }
+
+       UNSAFE_componentWillUnmount() {
+        ShakeEventExpo.removeListener();
+     }
+
     addPoint(gestureState) {
         this.setState({
             wordColor: gameColors.correctGreen,
@@ -74,6 +86,18 @@ export default class GameComponent extends React.Component {
                 randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
             })
         }, 200);
+    }
+
+    noPoint() {
+        this.setState({
+            wordColor: 'red',
+        })
+        setTimeout(() => {
+            this.setState({
+                wordColor: 'white',
+                randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
+            })
+        }, 800);
     }
 
     // Swipe handlers
