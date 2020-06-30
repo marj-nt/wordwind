@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View, Text, TouchableOpacity } from "react-native";
+import { Dimensions, View, Text, TouchableOpacity, Easing } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
@@ -58,10 +58,13 @@ export default class GameComponent extends React.Component {
             fill: 0,
             timer: null,
 
+            recDisabled: false,
+
             bg: checkColor(this.props.route.params.savedColor),
         };
         this.resetTimer = this.resetTimer.bind(this)
         this.increaseTimer = this.resetTimer.bind(this)
+        this.recRelease = this.recRelease.bind(this)
     }
 
     async UNSAFE_componentWillMount() {
@@ -126,6 +129,13 @@ export default class GameComponent extends React.Component {
 
     }
 
+    recHold() {
+
+    }
+
+    recRelease() {
+    }
+
     render() { 
 
         const config = {
@@ -149,13 +159,13 @@ export default class GameComponent extends React.Component {
                     <CountDown
                     style={gameStyles.timerFont}
                     until={5}
-                    onFinish={() =>
-                        this.props.navigation.navigate('Score', {
-                            finalScore: this.state.score,
-                            savedCategory: this.props.route.params.category,
-                            outcome: 'success'
-                        })
-                    }
+                    // onFinish={() =>
+                    //     this.props.navigation.navigate('Score', {
+                    //         finalScore: this.state.score,
+                    //         savedCategory: this.props.route.params.category,
+                    //         outcome: 'success'
+                    //     })
+                    // }
                     size={20}
                     timeToShow={['S']}
                     timeLabels={[]}
@@ -179,14 +189,22 @@ export default class GameComponent extends React.Component {
                     <AnimatedCircularProgress style={gameStyles.animatedCircle}
                     size={120}
                     width={10}
-                    fill={this.state.fill}
+                    prefill={0}
+                    fill={0}
                     duration={MAXTIME}
                     tintColor="#00e0ff"
-                    onAnimationComplete={() => console.log('onAnimationComplete')}
-                    backgroundColor="#3d5875" />
+                    onAnimationComplete={console.log('done')}
+                    backgroundColor="#3d5875"
+                    ref={(ref) => this.circularProgress = ref}
+                     />
 
-                    <TouchableOpacity style={gameStyles.recButton} onPress={this.onButtonPress}
-                    onPressIn={this.increaseTimer.bind(this)} onPressOut={this.resetTimer.bind(this)}>
+                    <TouchableOpacity style={gameStyles.recButton} disabled={this.state.recDisabled}
+                    onPressIn={() => {this.circularProgress.animate(100, 5000);
+                        
+                    }}
+                    onPressOut={() => {this.setState({ recInteract: true});this.circularProgress.animate(0, 1);
+                        this.setState({ recInteract: false})
+                    }}>
                         <Text>REC</Text>
                     </TouchableOpacity>
 

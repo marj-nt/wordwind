@@ -51,6 +51,15 @@ export const gameStyles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
     },
+    recContainer: {
+      top: 30,
+      width: 140,
+      height: 140,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
     recButton: {
         backgroundColor: gameColors.gradientRec[0],
         borderRadius: 100,
@@ -60,14 +69,6 @@ export const gameStyles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         top: 20
-    },
-    recContainer: {
-      width: 140,
-      height: 140,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: 'auto',
-      marginRight: 'auto',
     },
     animatedCircle: {
       position: 'absolute',
