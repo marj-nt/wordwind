@@ -57,8 +57,8 @@ export const gameStyles = StyleSheet.create({
       height: 140,
       justifyContent: 'center',
       alignItems: 'center',
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: 10,
+      marginRight: 10,
     },
     recButton: {
         backgroundColor: gameColors.gradientRec[0],
@@ -68,10 +68,13 @@ export const gameStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        top: 20
+        top: 20,
     },
     animatedCircle: {
       position: 'absolute',
       top: 5
-    }
+    },
+    playButtonImg: {
+      resizeMode: 'contain',
+    },
   })

@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View, Text, TouchableOpacity, Easing } from "react-native";
+import { Animated, Dimensions, View, Text, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
@@ -13,6 +13,9 @@ import { checkColor as checkColor } from '@components/checkColor.js';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.js';
+
+import playButtonGrey from '@assets/play-button-grey.png';
+import playButtonGreen from '@assets/play-button-green.png';
 
 var TimerMixin = require('react-timer-mixin');
 
@@ -58,13 +61,21 @@ export default class GameComponent extends React.Component {
             fill: 0,
             timer: null,
 
-            recDisabled: false,
+            recTouchDisabled: false,
+            playTouchDisabled: true,
+            playImg: playButtonGrey,
+            recColor: gameColors.gradientRec[0],
+
+            playAnimValue : new Animated.Value(90),
+            playViewState : true,
 
             bg: checkColor(this.props.route.params.savedColor),
         };
         this.resetTimer = this.resetTimer.bind(this)
         this.increaseTimer = this.resetTimer.bind(this)
+        this.handlePlay = this.handlePlay.bind(this)
         this.recRelease = this.recRelease.bind(this)
+        this.playCheck = this.playCheck.bind(this)
     }
 
     async UNSAFE_componentWillMount() {
@@ -129,6 +140,26 @@ export default class GameComponent extends React.Component {
 
     }
 
+    handlePlay() {
+        
+        if(this.state.playViewState == true){
+        Animated.timing(this.state.playAnimValue, {
+            toValue : 50,
+            timing : 1500
+        }).start(()=>{
+            this.setState({playViewState : false})
+        });
+        }
+        else{
+            Animated.timing(this.state.playAnimValue, {
+            toValue : 100,
+            timing : 1500
+            }).start(this.setState({playViewState: true})
+            );
+        }
+        
+    }
+
     recHold() {
 
     }
@@ -136,12 +167,30 @@ export default class GameComponent extends React.Component {
     recRelease() {
     }
 
+    resetPlay() {
+        this.setState({
+            playTouchDisabled: true,
+            playImg: playButtonGrey,
+        })
+    }
+
+    playCheck() {
+        this.setState({
+            playTouchDisabled: false,
+            playImg: playButtonGreen,
+        })
+    }
+
     render() { 
 
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
-          };        
+          };     
+
+          const animatedStyle = {
+            width : this.state.playAnimValue,
+          }
           
       return (
         <View>
@@ -193,25 +242,34 @@ export default class GameComponent extends React.Component {
                     fill={0}
                     duration={MAXTIME}
                     tintColor="#00e0ff"
-                    onAnimationComplete={console.log('done')}
+                    // onAnimationComplete={}
                     backgroundColor="#3d5875"
                     ref={(ref) => this.circularProgress = ref}
                      />
 
-                    <TouchableOpacity style={gameStyles.recButton} disabled={this.state.recDisabled}
-                    onPressIn={() => {this.circularProgress.animate(100, 5000);
+                    <TouchableOpacity style={[gameStyles.recButton, {backgroundColor: this.state.recColor}]} disabled={this.state.recTouchDisabled}
+                    onPressIn={() => {
+                        this.circularProgress.animate(100, 5000);
+                        this.resetPlay()
                         
                     }}
-                    onPressOut={() => {this.setState({ recInteract: true});this.circularProgress.animate(0, 1);
-                        this.setState({ recInteract: false})
+                    onPressOut={() => {
+                        this.circularProgress.animate(0, 1);
+                        this.playCheck()
                     }}>
                         <Text>REC</Text>
                     </TouchableOpacity>
 
                 </View>
-                <View style={gameStyles.recContainer}>
 
+                <TouchableOpacity onPress={this.handlePlay} disabled={this.state.playTouchDisabled}>
+                <View style={gameStyles.recContainer}>
+                    <Animated.Image style={[gameStyles.playButtonImg, animatedStyle]}
+                    source={this.state.playImg}>
+                    </Animated.Image>
                 </View>
+                </TouchableOpacity>
+                    
             </View>
 
 
