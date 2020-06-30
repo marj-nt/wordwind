@@ -157,6 +157,11 @@ export default class GameComponent extends React.Component {
             }).start(this.setState({playViewState: true})
             );
         }
+
+        this.setState({
+            recColor: 'lightgrey',
+            recTouchDisabled: true,
+        })
         
     }
 
