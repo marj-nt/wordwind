@@ -71,7 +71,7 @@ export default class GameComponent extends React.Component {
         });
        }
 
-       UNSAFE_componentWillUnmount() {
+    UNSAFE_componentWillUnmount() {
         ShakeEventExpo.removeListener();
      }
 

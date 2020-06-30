@@ -19,7 +19,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
     <Stack.Navigator 
-        initialRouteName='Options'
+        initialRouteName='Game'
         screenOptions={{headerShown: false}}
         defaultNavigationOptions={{gesturesEnabled: false}}
     >
@@ -28,12 +28,20 @@ function MainStackNavigator() {
       component={HomeComponent}
     />
     <Stack.Screen
+    name='Tutorial'
+    component={HomeComponent}
+  />
+    <Stack.Screen
       name='Categories'
       component={CategoriesComponent}
     />
     <Stack.Screen
       name='Game'
       component={GameComponent}
+      initialParams={{ 
+        duration: 30,
+        bg: 1,
+      }}
     />
     <Stack.Screen
       name='Score'
