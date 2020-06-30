@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native'
+import { withTheme } from 'react-native-elements';
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -77,4 +78,25 @@ export const gameStyles = StyleSheet.create({
     playButtonImg: {
       resizeMode: 'contain',
     },
+    animatedSound: {
+      width: 10,
+      height: 50,
+      backgroundColor: gameColors.correctGreen,
+      top: 30,
+      marginLeft: 5,
+      marginRight: 5,
+    },
+    animatedContainer: {
+      flexDirection: 'row', 
+      position: 'absolute',
+      top: 55, 
+      alignSelf: 'center',
+      zIndex: 1,
+    },
+    recFont: {
+      color: 'white',
+      fontFamily: 'Avenir Next',
+      letterSpacing: 3,
+      fontSize: 20,
+    }
   })

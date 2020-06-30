@@ -3,7 +3,8 @@ import { Animated, Dimensions, View, Text, TouchableOpacity, Image } from "react
 import { LinearGradient } from 'expo-linear-gradient';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import CountDown from 'react-native-countdown-component';
-import { ShakeEventExpo as ShakeEventExpo } from '@components/ShakeEventExpo.js'
+import { ShakeEventExpo as ShakeEventExpo } from '@components/ShakeEventExpo.js';
+import * as Animatable from 'react-native-animatable';
 
 import { withNavigation } from 'react-navigation'
 
@@ -13,6 +14,7 @@ import { checkColor as checkColor } from '@components/checkColor.js';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import {gameStyles as gameStyles, gameColors as gameColors} from '@styles/game.js';
+import {optionsStyles as optionsStyles } from '@styles/options.js';
 
 import playButtonGrey from '@assets/play-button-grey.png';
 import playButtonGreen from '@assets/play-button-green.png';
@@ -62,11 +64,14 @@ export default class GameComponent extends React.Component {
             timer: null,
 
             recTouchDisabled: false,
+            recText: 'REC',
             playTouchDisabled: true,
             playImg: playButtonGrey,
             recColor: gameColors.gradientRec[0],
+            barDisplays: 'none',
 
-            playAnimValue : new Animated.Value(90),
+            playWidthValue : new Animated.Value(90),
+            playTopValue : new Animated.Value(0),
             playViewState : true,
 
             bg: checkColor(this.props.route.params.savedColor),
@@ -143,25 +148,50 @@ export default class GameComponent extends React.Component {
     handlePlay() {
         
         if(this.state.playViewState == true){
-        Animated.timing(this.state.playAnimValue, {
-            toValue : 50,
-            timing : 1500
-        }).start(()=>{
-            this.setState({playViewState : false})
-        });
+            Animated.timing(this.state.playWidthValue, {
+                toValue : 50,
+                timing : 1500
+            }).start(()=>{
+                this.setState({playViewState : false})
+            });
+            Animated.timing(this.state.playTopValue, {
+                toValue : -10,
+                timing : 1500
+            }).start(()=>{
+                this.setState({playViewState : false})
+            });
+
+                this.setState({
+                    recColor: 'lightgrey',
+                    recTouchDisabled: true,
+                    playImg: playButtonGrey,
+                    barDisplays: 'flex-start',
+                })
+            
         }
         else{
-            Animated.timing(this.state.playAnimValue, {
+            Animated.timing(this.state.playWidthValue, {
             toValue : 100,
             timing : 1500
             }).start(this.setState({playViewState: true})
             );
+            Animated.timing(this.state.playTopValue, {
+                toValue : 0,
+                timing : 1500
+                }).start(this.setState({playViewState: true})
+                );
+
+                this.setState({
+                    recColor: gameColors.gradientRec[0],
+                    recTouchDisabled: false,
+                    playImg: playButtonGreen,
+                    barDisplays: 'none',
+                })
+            
+            
         }
 
-        this.setState({
-            recColor: 'lightgrey',
-            recTouchDisabled: true,
-        })
+        
         
     }
 
@@ -194,8 +224,20 @@ export default class GameComponent extends React.Component {
           };     
 
           const animatedStyle = {
-            width : this.state.playAnimValue,
+            width : this.state.playWidthValue,
+            top: this.state.playTopValue,
           }
+
+          const grow = {
+            from: {
+              height: 10,
+              top: 30,
+            },
+            to: {
+              height: 30,
+              top: 50,
+            },
+          };
           
       return (
         <View>
@@ -260,18 +302,37 @@ export default class GameComponent extends React.Component {
                     }}
                     onPressOut={() => {
                         this.circularProgress.animate(0, 1);
+                        this.setState({recText: 'REDO',})
                         this.playCheck()
                     }}>
-                        <Text>REC</Text>
+                        <Text style={gameStyles.recFont}>{this.state.recText}</Text>
                     </TouchableOpacity>
 
                 </View>
 
-                <TouchableOpacity onPress={this.handlePlay} disabled={this.state.playTouchDisabled}>
+                
+
+                <TouchableOpacity onPress={() => {
+                    this.handlePlay();
+                    //Timeout for testing only
+                    setTimeout(() => {this.handlePlay()}, 3000); 
+                }} 
+                disabled={this.state.playTouchDisabled}>
                 <View style={gameStyles.recContainer}>
+                
                     <Animated.Image style={[gameStyles.playButtonImg, animatedStyle]}
                     source={this.state.playImg}>
                     </Animated.Image>
+
+                    <View style={[gameStyles.animatedContainer, {display: this.state.barDisplays}]}>
+                    <Animatable.View style={gameStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
+                    </Animatable.View>
+                    <Animatable.View style={gameStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
+                    </Animatable.View>
+                    <Animatable.View style={gameStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
+                    </Animatable.View>
+                    </View>
+
                 </View>
                 </TouchableOpacity>
                     
