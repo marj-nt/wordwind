@@ -17,14 +17,10 @@ class HomeComponent extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      color: this.props.route.params.savedColor,
-      duration: this.props.route.params.savedDuration,
-      syllable: this.props.route.params.savedSyllable,
-      sfx: this.props.route.params.savedSfx,
-    }
   }
+
   render() {
+
   return (
     <View>
         <LinearGradient style={homeStyles.mainBackground} colors={gradientBlueGreen}>
@@ -36,10 +32,10 @@ class HomeComponent extends React.Component {
           <Animatable.View animation='fadeInUp'>
             <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
             onPress={() => this.props.navigation.navigate('Categories', {
-              savedColor: this.state.color,
-              savedDuration: this.state.duration,
-              savedSyllable: this.state.syllable,
-              savedSfx: this.state.sfx,
+              savedColor: this.props.route.params.savedColor,
+              savedDuration: this.props.route.params.savedDuration,
+              savedSyllable: this.props.route.params.savedSyllable,
+              savedSfx: this.props.route.params.savedSfx,
             })}>
               <Image style={homeStyles.icons} source={require(pathIcon1)}/>
               <Text style={homeStyles.buttonText}>PLAY</Text>

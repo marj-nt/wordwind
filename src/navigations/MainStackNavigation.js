@@ -27,7 +27,7 @@ function MainStackNavigator() {
       name='Home'
       component={HomeComponent}
       initialParams={{
-        color: 2,
+        color: 1,
         duration: 30,
         syllable: false,
         sfx: true,

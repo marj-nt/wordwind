@@ -20,11 +20,6 @@ class CategoriesComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      color: this.props.route.params.savedColor,
-      duration: this.props.route.params.savedDuration,
-      syllable: this.props.route.params.savedSyllable,
-      sfx: this.props.route.params.savedSfx,
-
       fontsLoaded: false,
     }
   }
@@ -51,10 +46,10 @@ class CategoriesComponent extends React.Component {
               <TouchableOpacity style={categoriesStyles.centerImage}
                 onPress={() => this.props.navigation.navigate('Game', {
                   category: 'sports',
-                  savedColor: this.state.color,
-                  savedDuration: this.state.duration,
-                  savedSyllable: this.state.syllable,
-                  savedSfx: this.state.sfx,
+                  savedColor: this.props.route.params.savedColor,
+                  savedDuration: this.props.route.params.savedDuration,
+                  savedSyllable: this.props.route.params.savedSyllable,
+                  savedSfx: this.props.route.params.savedSfx,
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon1}/>
@@ -63,10 +58,10 @@ class CategoriesComponent extends React.Component {
               <TouchableOpacity style={categoriesStyles.centerImage}
                 onPress={() => this.props.navigation.navigate('Game', {
                   category: 'music',
-                  savedColor: this.state.color,
-                  savedDuration: this.state.duration,
-                  savedSyllable: this.state.syllable,
-                  savedSfx: this.state.sfx,
+                  savedColor: this.props.route.params.savedColor,
+                  savedDuration: this.props.route.params.savedDuration,
+                  savedSyllable: this.props.route.params.savedSyllable,
+                  savedSfx: this.props.route.params.savedSfx,
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon2}/>
@@ -77,10 +72,10 @@ class CategoriesComponent extends React.Component {
                 <TouchableOpacity style={categoriesStyles.centerImage}
                   onPress={() => this.props.navigation.navigate('Game', {
                     category: 'food',
-                    savedColor: this.state.color,
-                    savedDuration: this.state.duration,
-                    savedSyllable: this.state.syllable,
-                    savedSfx: this.state.sfx,
+                    savedColor: this.props.route.params.savedColor,
+                    savedDuration: this.props.route.params.savedDuration,
+                    savedSyllable: this.props.route.params.savedSyllable,
+                    savedSfx: this.props.route.params.savedSfx,
                   })}
                 >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon3}/>
@@ -88,10 +83,10 @@ class CategoriesComponent extends React.Component {
               <TouchableOpacity style={categoriesStyles.centerImage}
                 onPress={() => this.props.navigation.navigate('Game', {
                   category: 'animals',
-                  savedColor: this.state.color,
-                  savedDuration: this.state.duration,
-                  savedSyllable: this.state.syllable,
-                  savedSfx: this.state.sfx,
+                  savedColor: this.props.route.params.savedColor,
+                  savedDuration: this.props.route.params.savedDuration,
+                  savedSyllable: this.props.route.params.savedSyllable,
+                  savedSfx: this.props.route.params.savedSfx,
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon4}/>
@@ -102,10 +97,10 @@ class CategoriesComponent extends React.Component {
             <TouchableOpacity style={categoriesStyles.centerImage}
               onPress={() => this.props.navigation.navigate('Game', {
                 category: 'colors',
-                savedColor: this.state.color,
-                savedDuration: this.state.duration,
-                savedSyllable: this.state.syllable,
-                savedSfx: this.state.sfx,
+                savedColor: this.props.route.params.savedColor,
+                savedDuration: this.props.route.params.savedDuration,
+                savedSyllable: this.props.route.params.savedSyllable,
+                savedSfx: this.props.route.params.savedSfx,
               })}
               >
             <Image style={categoriesStyles.shrinkImage} source={catIcon5}/>
@@ -113,10 +108,10 @@ class CategoriesComponent extends React.Component {
           <TouchableOpacity style={categoriesStyles.centerImage}
             onPress={() => this.props.navigation.navigate('Game', {
               category: 'kids',
-              savedColor: this.state.color,
-              savedDuration: this.state.duration,
-              savedSyllable: this.state.syllable,
-              savedSfx: this.state.sfx,
+              savedColor: this.props.route.params.savedColor,
+              savedDuration: this.props.route.params.savedDuration,
+              savedSyllable: this.props.route.params.savedSyllable,
+              savedSfx: this.props.route.params.savedSfx,
             })}
             >
             <Image style={categoriesStyles.shrinkImage} source={catIcon6}/>
