@@ -9,8 +9,13 @@ import ProgressBarAnimated from 'react-native-progress-bar-animated';
 import { withNavigation } from 'react-navigation'
 
 import {tutorialStyles as tutorialStyles, tutorialColors as tutorialColors} from '@styles/tutorial.js';
+import { gameStyles as gameStyles } from '@styles/game.js';
 import { msgArray as msgArray, dirArray as dirArray, disTopArray as disTopArray, disBotArray as disBotArray, 
-    wordArray as wordArray, wordPosArray as wordPosArray, topArray as topArray, leftArray as leftArray } from '@components/tutorialArrays.js'
+    wordArray as wordArray, wordPosArray as wordPosArray, topArray as topArray, leftArray as leftArray,
+  recPosArray as recPosArray, } from '@components/tutorialArrays.js'
+
+import playButtonGrey from '@assets/play-button-grey.png';
+import playButtonGreen from '@assets/play-button-green.png';
 
 import overlay from '@assets/overlay.png';
 import tutorialShake from '@assets/tutorial-shake.png';
@@ -62,7 +67,10 @@ export default class TutorialComponent extends React.Component {
             displayBottom: disBotArray[0],
 
             wordPos: wordPosArray[0],
-            recPos: 2,
+            recText: 'REC',
+            recPos: 0,
+            playPos: 0,
+            playImg: playButtonGrey,
             top: topArray[0],
             left: leftArray[0],
 
@@ -118,7 +126,20 @@ export default class TutorialComponent extends React.Component {
       }
 
     nextScreen(currentProgress) {
-        if(currentProgress === 7) {
+        if(currentProgress === 4) {
+          this.setState({
+            recText: 'REDO',
+        })
+        } else if(currentProgress === 5) {
+          this.setState({
+              playPos: 2,
+              playImg: playButtonGreen,
+          })
+      } else if(currentProgress === 6) {
+        this.setState({
+            playPos: 0,
+        })
+    } else if(currentProgress === 7) {
             this.setState({
                 shakeDisplay: 'flex',
             })
@@ -140,6 +161,7 @@ export default class TutorialComponent extends React.Component {
             word: wordArray[currentProgress],
 
             wordPos: wordPosArray[currentProgress],
+            recPos: recPosArray[currentProgress],
             top: topArray[currentProgress],
             left: leftArray[currentProgress],
 
@@ -197,18 +219,15 @@ export default class TutorialComponent extends React.Component {
             {/* BOTTOM CONTAINER */}
 
             <LinearGradient style={tutorialStyles.bottomContainer} colors={tutorialColors.gradientBottom}>
-            <View style={tutorialStyles.row}>
-                <View style={[tutorialStyles.recContainer, {zIndex: this.state.recPos}]}>
 
-                    <TouchableOpacity style={[tutorialStyles.recButton]}>
-                        <Text>REC</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View style={tutorialStyles.recContainer}>
-
-                </View>
+            
+            <View style={[tutorialStyles.recButton, {backgroundColor: 'red', zIndex: this.state.recPos,}]}>
+            <Text style={gameStyles.recFont}>{this.state.recText}</Text>
             </View>
+
+            <Image style={[tutorialStyles.playButton, {zIndex: this.state.playPos}]} source={this.state.playImg}/>
+          
+          
             
             <Image style={tutorialStyles.shadowOverlay} source={overlay}/>
             

@@ -43,3 +43,7 @@ export const topArray = [
 export const leftArray = [
     width / 3.5, width / 3.5, width / 3.5, width / 10, width / 10, width / 2, 0, 0, 0, 0, 0,
 ]
+
+export const recPosArray = [
+    0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0,
+]
