@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation'
 import * as Animatable from 'react-native-animatable';
 
 import { homeStyles as homeStyles } from '@styles/home.js'
+import BouncingSoundHome from '@components/BouncingSoundHome.js';
 
 const gradientBlueGreen = ['#70FAA8', '#A2B0FF'];
 
@@ -25,9 +26,15 @@ class HomeComponent extends React.Component {
     <View>
         <LinearGradient style={homeStyles.mainBackground} colors={gradientBlueGreen}>
 
+        <View style={homeStyles.topHalf}>
         <Animatable.View animation='tada' duration={2000} iterationCount={"infinite"} iterationDelay={1000}>
           <Image style={homeStyles.title} source={require(pathTitle)}/>
         </Animatable.View>
+
+        <BouncingSoundHome/>
+        </View>
+
+        <View style={homeStyles.bottomHalf}>
 
           <Animatable.View animation='fadeInUp'>
             <TouchableOpacity style={[homeStyles.buttonShape, homeStyles.playButton]}
@@ -57,6 +64,8 @@ class HomeComponent extends React.Component {
               <Text style={homeStyles.buttonText}>OPTIONS</Text>
             </TouchableOpacity>
           </Animatable.View>
+
+        </View>
 
         </LinearGradient>
         </View>

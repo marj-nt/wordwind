@@ -35,11 +35,18 @@ function MainStackNavigator() {
     />
     <Stack.Screen
     name='Tutorial'
-    component={HomeComponent}
+    component={TutorialComponent}
   />
     <Stack.Screen
       name='Categories'
       component={CategoriesComponent}
+      initialParams={{
+        category: 'sports',
+        color: 1,
+        duration: 30,
+        syllable: false,
+        sfx: true,
+      }}
     />
     <Stack.Screen
       name='Game'

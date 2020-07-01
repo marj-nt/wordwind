@@ -85,19 +85,4 @@ export const optionsStyles = StyleSheet.create({
   switchDistance: {
     marginLeft: 30,
   },
-  animatedSound: {
-    width: 10,
-    height: 50,
-    backgroundColor: gradientBlue[0],
-    top: 30,
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  animatedContainer: {
-    flexDirection: 'row', 
-    position: 'absolute',
-    top: 0, 
-    alignSelf: 'center',
-    zIndex: 1,
-  }
 });

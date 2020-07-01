@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { gradientBlue as gradientBlue } from '@styles/global.js';
 
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
@@ -16,9 +17,15 @@ export const homeStyles = StyleSheet.create({
     height: height,
   },
   title: {
-    top: 125,
+    marginTop: 125,
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  topHalf: {
+    height: height * 0.5,
+  },
+  bottomHalf: {
+    height: height * 0.5,
   },
   buttonShape: {
     width: 330,
@@ -32,8 +39,8 @@ export const homeStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 1,
     elevation: 1,
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    alignSelf: 'center',
+    marginBottom: 50,
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
@@ -54,18 +61,33 @@ export const homeStyles = StyleSheet.create({
   },
   playButton: {
     backgroundColor: buttonSalmon,
-    top: 250,
+    // top: 250,
   },
   tutorialButton: {
     backgroundColor: buttonBlue,
-    top: 300,
+    // top: 300,
   },
   optionsButton: {
     backgroundColor: buttonGrey,
-    top: 350,
+    // top: 350,
   },
   icons: {
     left: 24,
     position: 'absolute',
   },
+  animatedSound: {
+    width: 10,
+    height: 50,
+    backgroundColor: gradientBlue[0],
+    top: 30,
+    marginLeft: 7,
+    marginRight: 7,
+  },
+  animatedContainer: {
+    flexDirection: 'row', 
+    position: 'absolute',
+    top: height * 0.30,
+    alignSelf: 'center',
+    zIndex: 1,
+  }
 });

@@ -10,6 +10,7 @@ import { withNavigation } from 'react-navigation'
 
 import { shuffleWord as shuffleWord } from '@components/wordShuffle.js';
 import { checkColor as checkColor } from '@components/checkColor.js';
+import { SoundComponent as SoundComponent } from '@components/SoundComponent.js';
 
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
@@ -102,6 +103,7 @@ export default class GameComponent extends React.Component {
             wordColor: gameColors.correctGreen,
             score: this.state.score + 1,
         })
+        // SoundComponent.playSound();
         setTimeout(() => {
             this.setState({
                 wordColor: 'white',

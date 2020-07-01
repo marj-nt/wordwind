@@ -64,17 +64,6 @@ class OptionsComponent extends React.Component {
 
   render() {
 
-    const grow = {
-        from: {
-          height: 30,
-          top: 25,
-        },
-        to: {
-          height: 50,
-          top: 50,
-        },
-      };
-
     return (
       <View>
 
@@ -92,29 +81,6 @@ class OptionsComponent extends React.Component {
                 <BackButton/>
         </TouchableOpacity>
         </View>
-
-        
-
-
-            
-
-            <View style={optionsStyles.animatedContainer}>
-            <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
-                
-          </Animatable.View>
-          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={400} iterationCount={'infinite'} direction="alternate">
-                
-          </Animatable.View>
-          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={800} iterationCount={'infinite'} direction="alternate">
-              
-          </Animatable.View>
-          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={400} iterationCount={'infinite'} direction="alternate">
-              
-          </Animatable.View>
-          <Animatable.View style={optionsStyles.animatedSound} animation={grow} duration={500} iterationCount={'infinite'} direction="alternate">
-               
-          </Animatable.View>
-          </View>
 
             <View style={optionsStyles.whiteBackground}>
 
@@ -146,10 +112,6 @@ class OptionsComponent extends React.Component {
                 </TouchableOpacity>
 
                 </View>
-
-                
-
-
 
                     <Text style={optionsStyles.labelText}>Round Duration</Text>
                     <View style={optionsStyles.row}>
@@ -187,9 +149,6 @@ class OptionsComponent extends React.Component {
                     </View>
 
                 </View>
-         
-
-            
 
         </LinearGradient>
 

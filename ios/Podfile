@@ -49,4 +49,6 @@ target 'wordwind' do
 
   pod 'react-native-shake', :path => '../node_modules/react-native-shake'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
 end

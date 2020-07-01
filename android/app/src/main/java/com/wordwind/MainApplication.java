@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
 import com.clipsub.RNShake.RNShakeEventPackage;
 import com.horcrux.svg.SvgPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
@@ -41,12 +42,20 @@ public class MainApplication extends Application implements ReactApplication {
       return BuildConfig.DEBUG;
     }
 
+    // @Override
+    // protected List<ReactPackage> getPackages() {
+    //   List<ReactPackage> packages = new PackageList(this).getPackages();
+    //   packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
+    //   return packages;
+    // }
+
     @Override
     protected List<ReactPackage> getPackages() {
-      List<ReactPackage> packages = new PackageList(this).getPackages();
-      packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
-      return packages;
-    }
+    return Arrays.<ReactPackage>asList(
+        new MainReactPackage(),
+        new RNSoundPackage() // <-- New
+    );
+}
 
     @Override
     protected String getJSMainModuleName() {
