@@ -19,13 +19,19 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
     <Stack.Navigator 
-        initialRouteName='Game'
+        initialRouteName='Home'
         screenOptions={{headerShown: false}}
         defaultNavigationOptions={{gesturesEnabled: false}}
     >
     <Stack.Screen
       name='Home'
       component={HomeComponent}
+      initialParams={{
+        color: 2,
+        duration: 30,
+        syllable: false,
+        sfx: true,
+      }}
     />
     <Stack.Screen
     name='Tutorial'

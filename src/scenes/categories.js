@@ -1,11 +1,8 @@
-import React from "react";
-import { Dimensions, View, Text, Button, Image, TouchableOpacity } from "react-native";
-import { StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation';
 import { BackButton } from '@components/BackButton.js';
-import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
 
 import catIcon1 from '@assets/cat-1.png';
 import catIcon2 from '@assets/cat-2.png';
@@ -13,11 +10,6 @@ import catIcon3 from '@assets/cat-3.png';
 import catIcon4 from '@assets/cat-4.png';
 import catIcon5 from '@assets/cat-5.png';
 import catIcon6 from '@assets/cat-6.png';
-
-
-const customFonts = {
-  'CaviarDreams': require('@assets/fonts/CaviarDreams.ttf'),
-};
 
 import { globalStyles as globalStyles } from '@styles/global.js'
 import { categoriesStyles as categoriesStyles } from '@styles/categories.js'
@@ -33,17 +25,8 @@ class CategoriesComponent extends React.Component {
       syllable: this.props.route.params.savedSyllable,
       sfx: this.props.route.params.savedSfx,
 
-      fontLoaded: true,
+      fontsLoaded: false,
     }
-  }
-
-  async _loadFontsAsync() {
-    await Font.loadAsync(customFonts);
-    this.setState({ fontsLoaded: true });
-  }
-
-  UNSAFE_componentDidMount() {
-    this._loadFontsAsync();
   }
 
   render() {
