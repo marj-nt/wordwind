@@ -32,7 +32,7 @@ export function shuffleWord(list, syl) {
           list = colorsListSyl
           break;
         case 'kids':
-          list = kidsListSyl
+          list = kidsList
           break;
       }
     } else {
