@@ -29,23 +29,8 @@ const gradientBottom = ['#B8EBFC', '#E3E1FF']
 var initScore = 0;
 
 const MAXTIME = 5000;
-var second = 0;
 
 var countdown;
-
-function startCount() {
-    second = 0;
-    countdown = setInterval(function() {
-        second += 1;
-        console.log(second * 1000)
-    }, 1000);
-}
-
-
-function startStop() {
-    clearInterval(countdown);
-    return second * 1000;
-}
 
 export default class GameComponent extends React.Component { 
 
@@ -59,9 +44,8 @@ export default class GameComponent extends React.Component {
             score: initScore,
             duration: this.props.route.params.savedDuration,
 
-            seconds: 0,
+            second: 0,
             fill: 0,
-            timer: null,
 
             recTouchDisabled: false,
             recText: 'REC',
@@ -76,10 +60,7 @@ export default class GameComponent extends React.Component {
 
             bg: checkColor(this.props.route.params.savedColor),
         };
-        this.resetTimer = this.resetTimer.bind(this)
-        this.increaseTimer = this.resetTimer.bind(this)
         this.handlePlay = this.handlePlay.bind(this)
-        this.recRelease = this.recRelease.bind(this)
         this.playCheck = this.playCheck.bind(this)
     }
 
@@ -93,6 +74,28 @@ export default class GameComponent extends React.Component {
     UNSAFE_componentWillUnmount() {
         ShakeEventExpo.removeListener();
      }
+
+     onStart = () => {
+        this._interval = setInterval(() => {
+         this.setState({
+           second: (this.state.second + 1),
+        })
+     }, 1);
+   }
+
+   _interval: any;
+
+   onReset = () => {
+    this.setState({
+      second: 0,
+    });
+    clearInterval(this._interval);
+    }
+
+   onPause = () => {
+    clearInterval(this._interval);
+    console.log(this.state.second * 20)
+    }
 
     addPoint(gestureState) {
         this.setState({
@@ -126,23 +129,6 @@ export default class GameComponent extends React.Component {
     
     onSwipeRight(gestureState) {
         this.addPoint(gestureState)
-    }
-
-    increaseTimer = () => {
-        // this.setState({
-        //     timer:setInterval(function() {
-        //         console.log('hi')
-        //     }, 1000)
-        // }) = 
-        // startCount();
-    }
-
-    resetTimer = () => {
-        // var stored 
-        // stored = startStop();
-        // this.setState({seconds: stored});
-        // console.log(this.state.seconds)
-
     }
 
     handlePlay() {
@@ -193,13 +179,6 @@ export default class GameComponent extends React.Component {
 
         
         
-    }
-
-    recHold() {
-
-    }
-
-    recRelease() {
     }
 
     resetPlay() {
@@ -297,11 +276,14 @@ export default class GameComponent extends React.Component {
                     <TouchableOpacity style={[gameStyles.recButton, {backgroundColor: this.state.recColor}]} disabled={this.state.recTouchDisabled}
                     onPressIn={() => {
                         this.circularProgress.animate(100, 5000);
+                        this.onReset()
+                        this.onStart()
                         this.resetPlay()
                         
                     }}
                     onPressOut={() => {
                         this.circularProgress.animate(0, 1);
+                        this.onPause()
                         this.setState({recText: 'REDO',})
                         this.playCheck()
                     }}>
@@ -315,7 +297,7 @@ export default class GameComponent extends React.Component {
                 <TouchableOpacity onPress={() => {
                     this.handlePlay();
                     //Timeout for testing only
-                    setTimeout(() => {this.handlePlay()}, 3000); 
+                    setTimeout(() => {this.handlePlay()}, this.state.second * 20); 
                 }} 
                 disabled={this.state.playTouchDisabled}>
                 <View style={gameStyles.recContainer}>

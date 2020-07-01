@@ -62,7 +62,6 @@ export const gameStyles = StyleSheet.create({
       marginRight: 10,
     },
     recButton: {
-        backgroundColor: gameColors.gradientRec[0],
         borderRadius: 100,
         width: 90,
         height: 90,
