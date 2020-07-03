@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View, Text, TouchableOpacity, Switch, Image } from "react-native";
+import { Dimensions, View, Text, TouchableOpacity, Switch, Image, UIManager } from "react-native";
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { withNavigation } from 'react-navigation';
@@ -12,11 +12,14 @@ import { gradientBlue, gradientOrange, gradientPurple, gradientBlack } from '@st
 import { globalStyles as globalStyles } from '@styles/global.js'
 
 import optionsGear from '@assets/options-gear.png';
+import optionsCheck from '@assets/options-check.png';
 
 const gradientPurpleOrange = ['#B0B5FF', '#F4D8A8'];
 
 var width = Dimensions.get('screen').width; //full width
 var height = Dimensions.get('screen').height; //full width
+
+const checkOffset = 15;
 
 class OptionsComponent extends React.Component {
     constructor(props) {
@@ -29,6 +32,9 @@ class OptionsComponent extends React.Component {
 
             sylSwitchValue: false,
             sfxSwitchValue: false,
+
+            checkLeft: 20,
+            activeDurationBtn: 1,
         }
         this.changeColor = this.changeColor.bind(this)
         this.changeDuration = this.changeDuration.bind(this)
@@ -36,12 +42,19 @@ class OptionsComponent extends React.Component {
         this.toggleSfx = this.toggleSfx.bind(this)
     }
 
-    changeColor = (chosenColor) => {
-        this.setState({color: chosenColor})
+    changeColor = (chosenColor, xPos) => {
+        this.setState({
+            color: chosenColor,
+            checkLeft: xPos,
+        })
     }
 
-    changeDuration = (chosenDuration) => {
-        this.setState({duration: chosenDuration})
+
+    changeDuration = (chosenDuration, activeBtn) => {
+        this.setState({
+            duration: chosenDuration,
+            activeDurationBtn: activeBtn,
+        })
     }
 
     changeSfx = (chosenSfx) => {
@@ -82,46 +95,60 @@ class OptionsComponent extends React.Component {
         </TouchableOpacity>
         </View>
 
+            <View style={optionsStyles.outerWrapper}>
+            
+            <Image style={optionsStyles.imgGear} source={optionsGear}/>
+
             <View style={optionsStyles.whiteBackground}>
 
-                <Image style={optionsStyles.imgGear} source={optionsGear}/>
+                
 
                 <Text style={optionsStyles.labelText}>Background Color</Text>
                 
                 <View style={optionsStyles.row}>
 
-                <TouchableOpacity onPress={() => this.changeColor(1)}>
+                <TouchableOpacity onPress={() => this.changeColor(1, 0 + checkOffset)}>
                     <LinearGradient colors={gradientBlue} style={optionsStyles.colorSwatches}>
                     <Text style={optionsStyles.hideText}>1</Text>
                     </LinearGradient>
+                    
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeColor(2)}>
+
+                <TouchableOpacity onPress={() => this.changeColor(2, 66 + checkOffset)}>
                     <LinearGradient colors={gradientOrange} style={optionsStyles.colorSwatches}>
                     <Text style={optionsStyles.hideText}>2</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeColor(3)}>
+                <TouchableOpacity onPress={() => this.changeColor(3, 132 + checkOffset)}>
                     <LinearGradient colors={gradientPurple} style={optionsStyles.colorSwatches}>
                     <Text style={optionsStyles.hideText}>3</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeColor(4)}>
+                <TouchableOpacity onPress={() => this.changeColor(4, 198 + checkOffset)}>
                     <LinearGradient colors={gradientBlack} style={optionsStyles.colorSwatches}>
                     <Text style={optionsStyles.hideText}>4</Text>
                     </LinearGradient>
                 </TouchableOpacity>
 
+                <Image style={[optionsStyles.check, {left: this.state.checkLeft}]} source={optionsCheck}/>
+
                 </View>
 
                     <Text style={optionsStyles.labelText}>Round Duration</Text>
                     <View style={optionsStyles.row}>
-                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(30)}>
+                        <TouchableOpacity style={[optionsStyles.durationButtons,
+                            this.state.activeDurationBtn === 1 ? {backgroundColor: optionsColors.periwinkle} : {backgroundColor: optionsColors.lightpurple}]} 
+                        onPress={() => this.changeDuration(30, 1)}>
                             <Text style={optionsStyles.buttonText}>30</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(60)}>
+                        <TouchableOpacity style={[optionsStyles.durationButtons,
+                            this.state.activeDurationBtn === 2 ? {backgroundColor: optionsColors.periwinkle} : {backgroundColor: optionsColors.lightpurple}]} 
+                        onPress={() => this.changeDuration(60, 2)}>
                             <Text style={optionsStyles.buttonText}>60</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={optionsStyles.durationButtons} onPress={() => this.changeDuration(90)}>
+                        <TouchableOpacity style={[optionsStyles.durationButtons,
+                            this.state.activeDurationBtn === 3 ? {backgroundColor: optionsColors.periwinkle} : {backgroundColor: optionsColors.lightpurple}]} 
+                        onPress={() => this.changeDuration(90, 3)}>
                             <Text style={optionsStyles.buttonText}>90</Text>
                         </TouchableOpacity>
                     </View>
@@ -147,6 +174,8 @@ class OptionsComponent extends React.Component {
                     onValueChange = {this.toggleSfx}
                     value = {this.state.sfxSwitchValue}/>
                     </View>
+
+                </View>
 
                 </View>
 

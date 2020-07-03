@@ -63,12 +63,22 @@ export const gameStyles = StyleSheet.create({
     },
     recButton: {
         borderRadius: 100,
+        borderColor: 'whitesmoke',
+        borderWidth: 4,
         width: 90,
         height: 90,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
         top: 20,
+        shadowColor: 'black',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2,
+        elevation: 1,
     },
     animatedCircle: {
       position: 'absolute',

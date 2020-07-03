@@ -22,7 +22,13 @@ import playButtonGreen from '@assets/play-button-green.png';
 
 var TimerMixin = require('react-timer-mixin');
 
-
+function timerStyle(duration) {
+    var display = ['S']
+    if(duration > 30) {
+        display = ['M', 'S']
+    }
+    return display;
+}
 
 
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
@@ -44,6 +50,7 @@ export default class GameComponent extends React.Component {
             wordColor: 'white',
             score: initScore,
             duration: this.props.route.params.savedDuration,
+            clockStyle: timerStyle(this.props.route.params.savedDuration),
 
             second: 0,
             fill: 0,
@@ -235,19 +242,21 @@ export default class GameComponent extends React.Component {
                     {/* TIMER */}
                     <CountDown
                     style={gameStyles.timerFont}
-                    until={5}
-                    // onFinish={() =>
-                    //     this.props.navigation.navigate('Score', {
-                    //         finalScore: this.state.score,
-                    //         savedCategory: this.props.route.params.category,
-                    //         outcome: 'success'
-                    //     })
-                    // }
+                    until={this.props.route.params.savedDuration}
+                    onFinish={() =>
+                        this.props.navigation.navigate('Score', {
+                            finalScore: this.state.score,
+                            savedCategory: this.props.route.params.category,
+                            savedDuration: this.props.route.params.savedDuration,
+                        })
+                    }
                     size={20}
-                    timeToShow={['S']}
+                    timeToShow={this.state.clockStyle}
                     timeLabels={[]}
+                    separatorStyle={{color: 'white'}}
                     digitStyle={{backgroundColor: 'transparent'}}
                     digitTxtStyle={{color: 'white'}}
+                    showSeparator
                     />
 
                     {/* DISPLAY WORD */}

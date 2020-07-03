@@ -23,6 +23,14 @@ export class Triangle extends React.Component{
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         borderBottomColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
+        elevation: 1,
       },
     triangleLeft: {
       transform: [

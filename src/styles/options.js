@@ -5,6 +5,7 @@ var height = Dimensions.get('window').height; //full height
 
 export const optionsColors = {
   periwinkle: '#B0B5FF',
+  lightpurple: '#E1E3FF',
 }
 
 export const gradientBlue = ['#4C39A1', '#000C87'];
@@ -19,6 +20,7 @@ export const optionsStyles = StyleSheet.create({
     right: 0,
     width: width,
     height: height,
+    justifyContent: 'center',
   },
   row: {
     flex: 1,
@@ -41,21 +43,36 @@ export const optionsStyles = StyleSheet.create({
     width: 76,
     height: 35,
     borderRadius: 18,
-    backgroundColor: optionsColors.periwinkle,
+    backgroundColor: optionsColors.lightpurple,
     marginRight: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1,
+    elevation: 1,
+  },
+  outerWrapper: {
+    height: 600,
+    alignSelf: 'center',
+  },  
+  imgGear: {
+    alignSelf: 'center',
+    top: 50,
+    zIndex: 2,
   },
   whiteBackground: {
     width: 290,
     height: 450,
     backgroundColor: '#F8F8F8',
     borderRadius: 20,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    alignSelf: 'center',
     padding: 20,
+    paddingTop: 75,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -74,15 +91,17 @@ export const optionsStyles = StyleSheet.create({
     fontFamily: 'Avenir Next Condensed',
     fontSize: 18,
   },
-  imgGear: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    top: -40,
-  },
   hideText: {
     color: 'transparent',
   },  
   switchDistance: {
     marginLeft: 30,
   },
+  check: {
+    width: 35,
+    height: 35,
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: 5,
+  },  
 });

@@ -71,6 +71,9 @@ export class SuccessScreen extends React.Component{
 export class FailScreen extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      returnDuration: this.props.route.params.savedDuration,
+    }
   }
   render() {
     return(
@@ -91,7 +94,10 @@ export class FailScreen extends React.Component{
             <Text style={scoreStyles.bodyText}>Hint: If you’re stuck, try breaking words down into syllables!</Text>
             <Text style={scoreStyles.bodyText}>(or turn on Syllable help in OPTIONS)</Text>
         
-          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Game')}}>
+          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Game', {
+            savedDuration: this.state.returnDuration,
+          })
+        }}>
             <Text>Try {this.props.category} again!</Text>
           </TouchableOpacity>
   

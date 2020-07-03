@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
       position: 'absolute',
     //   borderColor: 'black',
     //   borderWidth: 2,
-      top: 20,
+      top: 40,
       left: 15,
   },
 });
