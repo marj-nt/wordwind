@@ -3,6 +3,10 @@ import { StyleSheet, Dimensions } from 'react-native'
 var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
+const primaryPurple = '#AB70E3';
+const primaryTeal = '#5DA9AB';
+const failRed = '#C0694A';
+
 export const scoreStyles = StyleSheet.create({
   mainBackground: {
     left: 0,
@@ -31,15 +35,15 @@ export const scoreStyles = StyleSheet.create({
   successText: {
     color: 'green',
     fontSize: 20,
-    fontFamily: 'Avenir Next',
+    fontFamily: 'CaviarDreams',
     fontWeight: 'bold',
     marginTop: -40,
     marginBottom: 20,
   },
   failText: {
-    color: 'red',
+    color: failRed,
     fontSize: 20,
-    fontFamily: 'Avenir Next',
+    fontFamily: 'CaviarDreams',
     fontWeight: 'bold',
     marginTop: -40,
     marginBottom: 20,
@@ -53,6 +57,17 @@ export const scoreStyles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 30,
   },
+  successScore: {
+    fontWeight: 'bold',
+    color: 'green',
+  },
+  failScore: {
+    fontWeight: 'bold',
+    color: failRed,
+  },
+  subMessage: {
+    fontSize: 14,
+  },  
   playButtons: {
     width: 200,
     height: 40,
@@ -62,6 +77,20 @@ export const scoreStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1,
+    elevation: 1,
+  },
+  primarySuccessBtn: {
+    backgroundColor: primaryPurple,
+  },
+  primaryFailBtn: {
+    backgroundColor: primaryTeal,
   },
   imgMic: {
     top: -50,

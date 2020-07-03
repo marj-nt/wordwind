@@ -52,7 +52,7 @@ function MainStackNavigator() {
       name='Game'
       component={GameComponent}
       initialParams={{ 
-        duration: 30,
+        savedDuration: 30,
         bg: 1,
       }}
     />

@@ -46,11 +46,14 @@ export class SuccessScreen extends React.Component{
             <Text style={scoreStyles.successText}>Success!</Text>
     
       
-            <Text style={scoreStyles.bodyText}>Your quick and skilled reading helped you conquer {this.props.score} words!</Text>
+            <Text style={scoreStyles.bodyText}>Your quick and skilled reading helped you conquer <Text style={scoreStyles.successScore}>{this.props.score}</Text> words!</Text>
         
   
-          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Game')}}>
-            <Text>Play {this.props.category} again!</Text>
+          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primarySuccessBtn]} onPress={() => {this.props.navigation.navigate('Game', {
+            savedDuration: this.props.duration,
+          })
+          }}>
+            <Text style={{color: 'white'}}>Play {this.props.category} again!</Text>
           </TouchableOpacity>
   
           <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Categories')}}>
@@ -71,10 +74,8 @@ export class SuccessScreen extends React.Component{
 export class FailScreen extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      returnDuration: this.props.route.params.savedDuration,
-    }
   }
+
   render() {
     return(
       <View>
@@ -90,15 +91,16 @@ export class FailScreen extends React.Component{
   
             <Text style={scoreStyles.failText}>Try Again!!!</Text>
     
-            <Text style={scoreStyles.bodyText}>You got through {this.props.score} words.</Text>
-            <Text style={scoreStyles.bodyText}>Hint: If you’re stuck, try breaking words down into syllables!</Text>
-            <Text style={scoreStyles.bodyText}>(or turn on Syllable help in OPTIONS)</Text>
+            <Text style={scoreStyles.bodyText}>You got through <Text style={scoreStyles.failScore}>{this.props.score}</Text> words.</Text>
+            <Text style={scoreStyles.bodyText}>Hint: If you’re stuck, try breaking words down into syllables!{'\n'}
+            <Text style={scoreStyles.subMessage}>(or turn on Syllable help in OPTIONS)</Text>
+            </Text>
         
-          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Game', {
-            savedDuration: this.state.returnDuration,
+          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primaryFailBtn]} onPress={() => {this.props.navigation.navigate('Game', {
+            savedDuration: this.props.duration,
           })
         }}>
-            <Text>Try {this.props.category} again!</Text>
+            <Text style={{color: 'white'}}>Try {this.props.category} again!</Text>
           </TouchableOpacity>
   
           <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Categories')}}>
@@ -131,7 +133,7 @@ class ScoreComponent extends React.Component {
         navigation={this.props.navigation}/>;
       } else {
         screen = <FailScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}
-        navigation={this.props.navigation}/>
+        navigation={this.props.navigation} duration={this.props.route.params.savedDuration}/>
       }
       return(
         <View>
