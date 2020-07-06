@@ -25,6 +25,15 @@ export class SuccessScreen extends React.Component{
   constructor(props){
     super(props)
   }
+
+  clickBack = () => {
+    this.props.parentBack()
+  }
+
+  clickCat = () => {
+    this.props.parentCat()
+  }
+
   render() {
     return(
       <View>
@@ -37,7 +46,7 @@ export class SuccessScreen extends React.Component{
   
       <View style={scoreStyles.mainBackground}>
   
-        <Animatable.View style={scoreStyles.whiteBackground} animation='fadeInUp' onTransitionEnd={scoreStyles.whiteBackground}>
+        <Animatable.View style={scoreStyles.whiteBackground} animation='fadeInUp'>
         
   
           <Image style={scoreStyles.imgMic} source={successPath}/>
@@ -49,14 +58,11 @@ export class SuccessScreen extends React.Component{
             <Text style={scoreStyles.bodyText}>Your quick and skilled reading helped you conquer <Text style={scoreStyles.successScore}>{this.props.score}</Text> words!</Text>
         
   
-          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primarySuccessBtn]} onPress={() => {this.props.navigation.navigate('Game', {
-            savedDuration: this.props.duration,
-          })
-          }}>
+          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primarySuccessBtn]} onPress={this.clickBack}>
             <Text style={{color: 'white'}}>Play {this.props.category} again!</Text>
           </TouchableOpacity>
   
-          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Categories')}}>
+          <TouchableOpacity style={scoreStyles.playButtons} onPress={this.clickCat}>
             <Text>Play another category</Text>
           </TouchableOpacity>
   
@@ -76,7 +82,16 @@ export class FailScreen extends React.Component{
     super(props)
   }
 
+  clickBack = () => {
+    this.props.parentBack()
+  }
+
+  clickCat = () => {
+    this.props.parentCat()
+  }
+
   render() {
+
     return(
       <View>
       <LinearGradient colors={gradientBlueGreen}>
@@ -85,7 +100,7 @@ export class FailScreen extends React.Component{
 
       <View style={scoreStyles.shadowOverlay}></View>
   
-        <Animatable.View style={scoreStyles.whiteBackground} animation='fadeInUp' onTransitionEnd={scoreStyles.whiteBackground}>
+        <Animatable.View style={scoreStyles.whiteBackground} animation='fadeInUp'>
         
           <Image style={scoreStyles.imgMic} source={failPath}/>
   
@@ -96,14 +111,11 @@ export class FailScreen extends React.Component{
             <Text style={scoreStyles.subMessage}>(or turn on Syllable help in OPTIONS)</Text>
             </Text>
         
-          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primaryFailBtn]} onPress={() => {this.props.navigation.navigate('Game', {
-            savedDuration: this.props.duration,
-          })
-        }}>
+          <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primaryFailBtn]} onPress={this.clickBack}>
             <Text style={{color: 'white'}}>Try {this.props.category} again!</Text>
           </TouchableOpacity>
   
-          <TouchableOpacity style={scoreStyles.playButtons} onPress={() => {this.props.navigation.navigate('Categories')}}>
+          <TouchableOpacity style={scoreStyles.playButtons} onPress={this.clickCat}>
             <Text>Try another category</Text>
           </TouchableOpacity>
   
@@ -125,15 +137,27 @@ var screen = <SuccessScreen score={0} category={'sports'}/>;
 class ScoreComponent extends React.Component {
   constructor(props) {
     super(props)
+    this.navigateBack = this.navigateBack.bind(this);
+  }
+
+  navigateBack = () => {
+    this.props.navigation.navigate('Game', {
+      savedDuration: this.props.route.params.savedDuration,
+      id: String(this.props.route.params.id + 1),
+    })
+  }
+
+  navigateCategory = () => {
+    this.props.navigation.navigate('Categories')
   }
 
     render() {
       if (this.props.route.params.finalScore > 5) {
         screen = <SuccessScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}
-        navigation={this.props.navigation}/>;
+        parentBack={this.navigateBack} parentCat={this.navigateCategory}/>;
       } else {
         screen = <FailScreen score={this.props.route.params.finalScore} category={this.props.route.params.savedCategory}
-        navigation={this.props.navigation} duration={this.props.route.params.savedDuration}/>
+        parentBack={this.navigateBack} parentCat={this.navigateCategory}/>
       }
       return(
         <View>

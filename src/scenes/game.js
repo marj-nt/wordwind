@@ -33,11 +33,7 @@ function timerStyle(duration) {
 
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
-var initScore = 0;
-
 const MAXTIME = 5000;
-
-var countdown;
 
 export default class GameComponent extends React.Component { 
 
@@ -48,7 +44,7 @@ export default class GameComponent extends React.Component {
         this.state = {
             randomWord: shuffleWord(this.props.route.params.category, this.props.route.params.savedSyllable),
             wordColor: 'white',
-            score: initScore,
+            score: 0,
             duration: this.props.route.params.savedDuration,
             clockStyle: timerStyle(this.props.route.params.savedDuration),
 
@@ -67,12 +63,15 @@ export default class GameComponent extends React.Component {
             playViewState : true,
 
             bg: checkColor(this.props.route.params.savedColor),
+
+            timerID: 0,
         };
         this.handlePlay = this.handlePlay.bind(this)
         this.playCheck = this.playCheck.bind(this)
+        this.resetScore = this.resetScore.bind(this)
     }
 
-    async UNSAFE_componentWillMount() {
+    UNSAFE_componentWillMount() {
         ShakeEventExpo.addListener(() => {
           //add your code here
           this.noPoint();
@@ -93,6 +92,12 @@ export default class GameComponent extends React.Component {
 
    _interval: any;
 
+   resetScore = () => {
+    this.setState({
+        score: 0,
+      });
+   }
+
    onReset = () => {
     this.setState({
       second: 0,
@@ -102,7 +107,6 @@ export default class GameComponent extends React.Component {
 
    onPause = () => {
     clearInterval(this._interval);
-    console.log(this.state.second * 20)
     }
 
     addPoint(gestureState) {
@@ -226,8 +230,9 @@ export default class GameComponent extends React.Component {
               top: 50,
             },
           };
-          
+
       return (
+
         <View>
 
             {/* TOP CONTAINER */}
@@ -241,15 +246,19 @@ export default class GameComponent extends React.Component {
 
                     {/* TIMER */}
                     <CountDown
+                    id={this.props.route.params.id}
                     style={gameStyles.timerFont}
-                    until={this.props.route.params.savedDuration}
-                    onFinish={() =>
+                    // until={this.props.route.params.savedDuration}
+                    until={5}
+                    onFinish={() => {
                         this.props.navigation.navigate('Score', {
                             finalScore: this.state.score,
                             savedCategory: this.props.route.params.category,
                             savedDuration: this.props.route.params.savedDuration,
+                            id: this.props.route.params.id,
                         })
-                    }
+                        this.resetScore()
+                    }}
                     size={20}
                     timeToShow={this.state.clockStyle}
                     timeLabels={[]}

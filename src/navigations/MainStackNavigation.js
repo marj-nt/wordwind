@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+import { NavigationActions } from 'react-navigation'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import HomeComponent from '@screens/home.js'
@@ -27,10 +28,10 @@ function MainStackNavigator() {
       name='Home'
       component={HomeComponent}
       initialParams={{
-        color: 1,
-        duration: 30,
-        syllable: false,
-        sfx: true,
+        savedColor: 1,
+        savedDuration: 30,
+        savedSyllable: false,
+        savedSfx: true,
       }}
     />
     <Stack.Screen
@@ -46,12 +47,15 @@ function MainStackNavigator() {
         duration: 30,
         syllable: false,
         sfx: true,
+        id: '0',
+        initScore: 0,
       }}
     />
     <Stack.Screen
       name='Game'
       component={GameComponent}
       initialParams={{ 
+        initScore: 0,
         savedDuration: 30,
         bg: 1,
       }}

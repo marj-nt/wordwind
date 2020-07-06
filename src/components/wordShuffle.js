@@ -6,12 +6,8 @@ export function shuffleWord(list, syl) {
     var propString = list
     var boolSyl = syl
 
-    console.log(list)
-
     // Default category
     var list = sportsList;
-
-    console.log(syl)
     
 
     if(boolSyl) {
