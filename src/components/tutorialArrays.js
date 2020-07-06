@@ -4,8 +4,8 @@ var width = Dimensions.get('window').width; //full width
 var height = Dimensions.get('window').height; //full height
 
 export const msgArray = ['Welcome to WordWind!\n\nTest your reading skills by having other players guess what you’re saying - backwards!\n\n(tap anywhere to continue)',
-                'Let’s start simple: Try to figure out how to say “FUN” backwards!',
-                'Let’s start simple Once you’re ready to read out loud, hold the red record button and say NUFFF!',
+                'Let’s start simple:\nTry to figure out how to say “FUN” backwards!',
+                'Let’s start simple:\nOnce you’re ready to read out loud, hold the red record button and say NUFFF!',
                 'Release when you are done to end the recording',
                 'Stumbled and want to try again?\n\nRecord until you get it right!',
                 'Once you’re ready, tap the play button to let your friends hear in reverse so it sounds “normal”!',

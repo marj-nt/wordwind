@@ -14,6 +14,7 @@ import MainStackNavigator from './src/navigations/MainStackNavigation'
 
 const getFonts = () => Font.loadAsync({
   'CaviarDreams': require('@assets/fonts/CaviarDreams.ttf'),
+  'CaviarDreamsBold': require('@assets/fonts/CaviarDreams_Bold.ttf'),
 })
 
 export default function App() {

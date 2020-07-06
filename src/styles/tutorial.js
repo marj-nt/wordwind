@@ -68,6 +68,8 @@ export const tutorialStyles = StyleSheet.create({
       position: 'absolute',
       marginTop: height * 0.08,
       right: 60,
+      width: 90,
+      height: 90,
     },
     recContainer: {
       width: 140,

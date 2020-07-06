@@ -22,6 +22,15 @@ export const optionsStyles = StyleSheet.create({
     height: height,
     justifyContent: 'center',
   },
+  titleFont: {
+    position: 'absolute',
+    top: 40,
+    fontFamily: 'CaviarDreamsBold',
+    fontSize: 36,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   row: {
     flex: 1,
     flexDirection: 'row',
@@ -57,8 +66,9 @@ export const optionsStyles = StyleSheet.create({
     elevation: 1,
   },
   outerWrapper: {
-    height: 600,
+    height: 400,
     alignSelf: 'center',
+    justifyContent: 'center',
   },  
   imgGear: {
     alignSelf: 'center',

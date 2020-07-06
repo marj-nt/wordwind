@@ -82,6 +82,8 @@ class OptionsComponent extends React.Component {
 
         <LinearGradient style={optionsStyles.mainBackground} colors={gradientPurpleOrange}>
 
+        <Text style={optionsStyles.titleFont}>Options</Text>
+
         <View style={globalStyles.backContainer}>
         <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Home', {

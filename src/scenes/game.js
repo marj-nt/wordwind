@@ -30,7 +30,6 @@ function timerStyle(duration) {
     return display;
 }
 
-
 const gradientBottom = ['#B8EBFC', '#E3E1FF']
 
 const MAXTIME = 5000;
@@ -95,6 +94,16 @@ export default class GameComponent extends React.Component {
    resetScore = () => {
     this.setState({
         score: 0,
+        recTouchDisabled: false,
+        recText: 'REC',
+        playTouchDisabled: true,
+        playImg: playButtonGrey,
+        recColor: gameColors.gradientRec[0],
+        barDisplays: 'none',
+
+        playWidthValue : new Animated.Value(90),
+        playTopValue : new Animated.Value(0),
+        playViewState : true,
       });
    }
 
@@ -186,12 +195,8 @@ export default class GameComponent extends React.Component {
                     playImg: playButtonGreen,
                     barDisplays: 'none',
                 })
-            
-            
-        }
 
-        
-        
+        }
     }
 
     resetPlay() {
@@ -248,8 +253,7 @@ export default class GameComponent extends React.Component {
                     <CountDown
                     id={this.props.route.params.id}
                     style={gameStyles.timerFont}
-                    // until={this.props.route.params.savedDuration}
-                    until={5}
+                    until={this.props.route.params.savedDuration}
                     onFinish={() => {
                         this.props.navigation.navigate('Score', {
                             finalScore: this.state.score,

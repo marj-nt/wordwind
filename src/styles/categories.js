@@ -13,7 +13,7 @@ export const categoriesStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleFont: {
-    fontFamily: 'CaviarDreams',
+    fontFamily: 'CaviarDreamsBold',
     fontSize: 36,
     fontWeight: 'bold',
     alignSelf: 'center',
