@@ -3,6 +3,7 @@ import { View, Text, Button, TouchableOpacity, StyleSheet, Dimensions, Image, } 
 import { LinearGradient } from 'expo-linear-gradient'
 import { withNavigation } from 'react-navigation'
 import * as Animatable from 'react-native-animatable';
+import AnimateNumber from 'react-native-animate-number';
 
 import successPath from '@assets/score-success.png';
 import failPath from '@assets/score-fail.png';
@@ -55,9 +56,15 @@ export class SuccessScreen extends React.Component{
             <Text style={scoreStyles.successText}>Success!</Text>
     
       
-            <Text style={scoreStyles.bodyText}>Your quick and skilled reading helped you conquer <Text style={scoreStyles.successScore}>{this.props.score}</Text> words!</Text>
-        
-  
+            <Text style={scoreStyles.bodyText}>Your quick and skilled reading helped you conquer {''}
+            <AnimateNumber 
+            style={scoreStyles.successScore}
+            value={this.props.score}
+            countBy={1}
+            timing='easeIn'
+            />
+            {''} words!</Text>
+
           <TouchableOpacity style={[scoreStyles.playButtons, scoreStyles.primarySuccessBtn]} onPress={this.clickBack}>
             <Text style={{color: 'white'}}>Play {this.props.category} again!</Text>
           </TouchableOpacity>
@@ -106,7 +113,14 @@ export class FailScreen extends React.Component{
   
             <Text style={scoreStyles.failText}>Try Again!!!</Text>
     
-            <Text style={scoreStyles.bodyText}>You got through <Text style={scoreStyles.failScore}>{this.props.score}</Text> words.</Text>
+            <Text style={scoreStyles.bodyText}>You got through {''}
+            <AnimateNumber 
+            style={scoreStyles.failScore}
+            value={this.props.score}
+            countBy={1}
+            timing='easeIn'
+            />
+            {''} words.</Text>
             <Text style={scoreStyles.bodyText}>Hint: If you’re stuck, try breaking words down into syllables!{'\n'}
             <Text style={scoreStyles.subMessage}>(or turn on Syllable help in OPTIONS)</Text>
             </Text>
