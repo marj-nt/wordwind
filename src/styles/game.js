@@ -28,6 +28,7 @@ export const gameStyles = StyleSheet.create({
     },
     wordFont: {
       fontFamily: 'Avenir Next Condensed',
+      textAlign: 'center',
       color: 'white',
       fontSize: 60,
       letterSpacing: 5,
@@ -39,6 +40,15 @@ export const gameStyles = StyleSheet.create({
       shadowOpacity: 0.75,
       shadowRadius: 2,
       elevation: 1,
+    },
+    readyFont: {
+      fontFamily: 'Avenir Next Condensed',
+      textAlign: 'center',
+      color: 'white',
+      fontSize: 20,
+      position: 'absolute',
+      bottom: 40,
+      letterSpacing: 3,
     },
     timerFont: {
       fontFamily: 'Avenir Next Condensed',

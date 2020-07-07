@@ -46,10 +46,14 @@ export default class GameComponent extends React.Component {
             score: 0,
             duration: this.props.route.params.savedDuration,
             clockStyle: timerStyle(this.props.route.params.savedDuration),
+            clockRunning: false,
+            displayGame: 'none',
+            readyDisplay: 'flex',
 
             second: 0,
             fill: 0,
 
+            gameTouchDisabled: false,
             recTouchDisabled: false,
             recText: 'REC',
             playTouchDisabled: true,
@@ -68,6 +72,7 @@ export default class GameComponent extends React.Component {
         this.handlePlay = this.handlePlay.bind(this)
         this.playCheck = this.playCheck.bind(this)
         this.resetScore = this.resetScore.bind(this)
+        this.beginGame = this.beginGame.bind(this)
     }
 
     UNSAFE_componentWillMount() {
@@ -104,6 +109,11 @@ export default class GameComponent extends React.Component {
         playWidthValue : new Animated.Value(90),
         playTopValue : new Animated.Value(0),
         playViewState : true,
+
+        clockRunning: false,
+        gameTouchDisabled: false,
+        readyDisplay: 'flex',
+        
       });
    }
 
@@ -213,6 +223,15 @@ export default class GameComponent extends React.Component {
         })
     }
 
+    beginGame() {
+        console.log('tapped')
+        this.setState({
+            clockRunning: true,
+            gameTouchDisabled: true,
+            readyDisplay: 'none',
+        })
+    }
+
     render() { 
 
         const config = {
@@ -247,13 +266,20 @@ export default class GameComponent extends React.Component {
             onSwipeRight={(state) => this.addPoint(state)}
             config={config}
             >
+
+                <TouchableOpacity onPress={this.beginGame} disabled={this.state.gameTouchDisabled}>
+
                 <LinearGradient style={gameStyles.topContainer} colors={this.state.bg}>
+
+                <Text style={[gameStyles.readyFont, {display: this.state.readyDisplay}]}>( Tap when ready! )</Text>
 
                     {/* TIMER */}
                     <CountDown
+                    running={this.state.clockRunning}
                     id={this.props.route.params.id}
                     style={gameStyles.timerFont}
                     until={this.props.route.params.savedDuration}
+                    // until={5}
                     onFinish={() => {
                         this.props.navigation.navigate('Score', {
                             finalScore: this.state.score,
@@ -275,7 +301,10 @@ export default class GameComponent extends React.Component {
                     {/* DISPLAY WORD */}
                     <Text style={[gameStyles.wordFont, {color: this.state.wordColor}]}>{this.state.randomWord}</Text>
 
+
                 </LinearGradient>
+
+                </TouchableOpacity>
 
             </GestureRecognizer>
 
@@ -321,7 +350,8 @@ export default class GameComponent extends React.Component {
                 <TouchableOpacity onPress={() => {
                     this.handlePlay();
                     //Timeout for testing only
-                    setTimeout(() => {this.handlePlay()}, this.state.second * 20); 
+                    setTimeout(() => {this.handlePlay()}, this.state.second * 30); 
+                    console.log(this.state.second * 30)
                 }} 
                 disabled={this.state.playTouchDisabled}>
                 <View style={gameStyles.recContainer}>
