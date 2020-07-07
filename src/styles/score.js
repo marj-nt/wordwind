@@ -35,7 +35,7 @@ export const scoreStyles = StyleSheet.create({
   successText: {
     color: 'green',
     fontSize: 20,
-    fontFamily: 'CaviarDreams',
+    fontFamily: 'CaviarDreamsBold',
     fontWeight: 'bold',
     marginTop: -40,
     marginBottom: 20,
@@ -43,7 +43,7 @@ export const scoreStyles = StyleSheet.create({
   failText: {
     color: failRed,
     fontSize: 20,
-    fontFamily: 'CaviarDreams',
+    fontFamily: 'CaviarDreamsBold',
     fontWeight: 'bold',
     marginTop: -40,
     marginBottom: 20,
