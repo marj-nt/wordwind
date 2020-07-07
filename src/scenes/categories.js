@@ -53,6 +53,7 @@ class CategoriesComponent extends React.Component {
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon1}/>
+                <Text style={categoriesStyles.catLabels}>SPORTS</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={categoriesStyles.centerImage}
@@ -65,6 +66,7 @@ class CategoriesComponent extends React.Component {
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon2}/>
+                <Text style={categoriesStyles.catLabels}>MUSIC</Text>
               </TouchableOpacity>
             </View>
   
@@ -79,6 +81,7 @@ class CategoriesComponent extends React.Component {
                   })}
                 >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon3}/>
+                <Text style={categoriesStyles.catLabels}>FOOD</Text>
               </TouchableOpacity>
               <TouchableOpacity style={categoriesStyles.centerImage}
                 onPress={() => this.props.navigation.navigate('Game', {
@@ -90,6 +93,7 @@ class CategoriesComponent extends React.Component {
                 })}
               >
                 <Image style={categoriesStyles.shrinkImage} source={catIcon4}/>
+                <Text style={categoriesStyles.catLabels}>ANIMALS</Text>
               </TouchableOpacity>
             </View>
   
@@ -104,6 +108,7 @@ class CategoriesComponent extends React.Component {
               })}
               >
             <Image style={categoriesStyles.shrinkImage} source={catIcon5}/>
+            <Text style={categoriesStyles.catLabels}>COLORS</Text>
           </TouchableOpacity>
           <TouchableOpacity style={categoriesStyles.centerImage}
             onPress={() => this.props.navigation.navigate('Game', {
@@ -115,6 +120,7 @@ class CategoriesComponent extends React.Component {
             })}
             >
             <Image style={categoriesStyles.shrinkImage} source={catIcon6}/>
+            <Text style={categoriesStyles.catLabels}>KIDS</Text>
           </TouchableOpacity>
             </View>
             </View>

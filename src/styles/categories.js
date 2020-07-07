@@ -35,7 +35,23 @@ export const categoriesStyles = StyleSheet.create({
     marginRight: 'auto',
   },
   shrinkImage: {
-    width: 125,
+    width: 130,
     resizeMode: 'contain',
+  },
+  catLabels: {
+    position: 'absolute',
+    bottom: 30,
+    alignSelf: 'center',
+    fontFamily: 'Avenir Next Condensed',
+    color: 'white',
+    fontSize: 24,
+    shadowColor: 'black',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2,
+        elevation: 1,
   }
 })
